@@ -1,4 +1,5 @@
 setwd("~/GitHub/Hero_Violence")
+source("~/GitHub/joe-package/F2R.R")
 dat = read.delim("HeroViolence.txt")
 dim(dat)
 sapply(dat, FUN=class)
@@ -10,7 +11,7 @@ dat$Game = factor(dat$Game, levels=c(1,2,3)
                   , labels=c("Control", "Antisocial", "Prosocial"))
 dat$Request = factor(dat$Request, levels=c(1,2), labels=c("Help Red Cross", "Save Lives"))
 # Remove all not intercepted by confederate
-dat = dat[dat$Intercepted == 1]
+dat = dat[dat$Intercepted == 1,]
 # Make binary response variable
 dat$DV = dat$Calls; dat$DV[dat$DV >= 1] = 1
 
@@ -32,8 +33,14 @@ barplot(means, beside=T, legend.text=c("Control", "Antisocial", "Hero")
 # Calls per volunteer?
 agreed = dat[dat$DV==1,]
 hist(agreed$Calls)
-modelCalls = aov(Calls ~ Game*Request, data=agreed)
+modelCalls = glm(Calls ~ Game*Request, family="poisson",data=agreed)
 summary(modelCalls) #again nothing
+means2 = tapply(agreed$Calls, INDEX=list(agreed$Game, agreed$Request), FUN=mean, na.rm=T)
+means2
+barplot(means2, beside=T, #legend.text=c("Control", "Antisocial", "Hero")
+       , ylab="Volunteering (#calls)"
+        #, args.legend=list(x=3.2, y=.55)
+       )
 
 # Ian's suggestion re: bad subjects 
 trim = dat[as.numeric(row.names(dat)) < 187,]
