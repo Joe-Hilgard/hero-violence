@@ -16,7 +16,7 @@ dat = dat[dat$Intercepted == 1,]
 dat$DV = dat$Calls; dat$DV[dat$DV >= 1] = 1
 
 # Let's make some models or chi-square tests I guess
-chisq.test(dat$DV, y=interaction(dat$Game, dat$Request))
+#chisq.test(dat$DV, y=interaction(dat$Game, dat$Request))
 model = glm(DV ~ Game*Request, family="binomial", data=dat)
 summary(model)
 ORs = data.frame("OR"=exp(summary(model)$coefficients[,1]),
@@ -34,12 +34,13 @@ barplot(means, beside=T, legend.text=c("Control", "Antisocial", "Hero")
 agreed = dat[dat$DV==1,]
 hist(agreed$Calls)
 modelCalls = glm(Calls ~ Game*Request, family="poisson",data=agreed)
-summary(modelCalls) #again nothing
+summary(modelCalls) 
+table(agreed$Game, agreed$Request)
 means2 = tapply(agreed$Calls, INDEX=list(agreed$Game, agreed$Request), FUN=mean, na.rm=T)
 means2
-barplot(means2, beside=T, #legend.text=c("Control", "Antisocial", "Hero")
+barplot(means2, beside=T, legend.text=c("Control", "Antisocial", "Hero")
        , ylab="Volunteering (#calls)"
-        #, args.legend=list(x=3.2, y=.55)
+        , args.legend=list(y=10.5)
        )
 
 # Ian's suggestion re: bad subjects 
@@ -68,7 +69,7 @@ tab = table(dat$DV, dat$Game, dat$Request)
 bf = contingencyTableBF(tab, sampleType="indepMulti", fixedMargin = "cols")
 bf
 tab2 = table(dat$DV, dat$Game)
-bf2 = contingencyTableBF(tab2, sampleType="indepMulti", fixedMargin="cols")
+bf2 = contingencyTableBF(tab2, sampleType="indepMulti", fixedMargin="cols", priorConcentration=10)
 bf2
 
 # Drop the interactions
