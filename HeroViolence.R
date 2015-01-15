@@ -8,7 +8,8 @@ sapply(dat, FUN=class)
 dat$ID = paste(dat$Location, dat$Subject, sep=".")
 # Clean up labels for factors
 dat$Game = factor(dat$Game, levels=c(1,2,3)
-                  , labels=c("Control", "Antisocial", "Prosocial"))
+                  , labels=c("Antisocial", "Control", "Prosocial"))
+dat$GameOrdered = ordered(dat$Game)
 dat$Request = factor(dat$Request, levels=c(1,2), labels=c("Help Red Cross", "Save Lives"))
 # Remove all not intercepted by confederate
 dat = dat[dat$Intercepted == 1,]
@@ -29,6 +30,15 @@ means = tapply(dat$DV, INDEX=list(dat$Game, dat$Request), FUN=mean, na.rm=T)
 barplot(means, beside=T, legend.text=c("Control", "Antisocial", "Hero")
         , ylab="Volunteering (proportion)"
         , args.legend=list(x=3.2, y=.55))
+# Ordinal factor of game?
+modelOrdinal = glm(DV ~ GameOrdered*Request, family="binomial", data=dat)
+summary(modelOrdinal)
+ORs = data.frame("OR"=exp(summary(modelOrdinal)$coefficients[,1]),
+                 "LL"=exp(summary(modelOrdinal)$coefficients[,1]-1.98*summary(modelOrdinal)$coefficients[,2]),
+                 "UL"=exp(summary(modelOrdinal)$coefficients[,1]+1.98*summary(modelOrdinal)$coefficients[,2])
+)
+d = OR.to.d(b=summary(modelOrdinal)$coefficients[,1])
+
 
 # Calls per volunteer?
 agreed = dat[dat$DV==1,]
