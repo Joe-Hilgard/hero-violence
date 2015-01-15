@@ -7,7 +7,7 @@ sapply(dat, FUN=class)
 # First things first: everyone needs a unique ID.
 dat$ID = paste(dat$Location, dat$Subject, sep=".")
 # Clean up labels for factors
-dat$Game = factor(dat$Game, levels=c(1,2,3)
+dat$Game = factor(dat$Game, levels=c(2,1,3)
                   , labels=c("Antisocial", "Control", "Prosocial"))
 dat$GameOrdered = ordered(dat$Game)
 dat$Request = factor(dat$Request, levels=c(1,2), labels=c("Help Red Cross", "Save Lives"))
@@ -27,7 +27,7 @@ ORs = data.frame("OR"=exp(summary(model)$coefficients[,1]),
 d = OR.to.d(b=summary(model)$coefficients[,1])
 # Doesn't look like it. Let's have the means.
 means = tapply(dat$DV, INDEX=list(dat$Game, dat$Request), FUN=mean, na.rm=T)
-barplot(means, beside=T, legend.text=c("Control", "Antisocial", "Hero")
+barplot(means, beside=T, legend.text=c("Antisocial", "Control", "Prosocial")
         , ylab="Volunteering (proportion)"
         , args.legend=list(x=3.2, y=.55))
 # Ordinal factor of game?
@@ -39,6 +39,14 @@ ORs = data.frame("OR"=exp(summary(modelOrdinal)$coefficients[,1]),
 )
 d = OR.to.d(b=summary(modelOrdinal)$coefficients[,1])
 
+# Extreme groups contrast?
+modelContrast = glm(DV ~ Game + Request, family="binomial", data=dat[dat$Game %in% c("Prosocial", "Antisocial"),])
+summary(modelContrast)
+ORs = data.frame("OR"=exp(summary(modelContrast)$coefficients[,1]),
+                 "LL"=exp(summary(modelContrast)$coefficients[,1]-1.98*summary(modelContrast)$coefficients[,2]),
+                 "UL"=exp(summary(modelContrast)$coefficients[,1]+1.98*summary(modelContrast)$coefficients[,2])
+)
+d = OR.to.d(b=summary(modelContrast)$coefficients[,1])
 
 # Calls per volunteer?
 agreed = dat[dat$DV==1,]
@@ -48,7 +56,7 @@ summary(modelCalls)
 table(agreed$Game, agreed$Request)
 means2 = tapply(agreed$Calls, INDEX=list(agreed$Game, agreed$Request), FUN=mean, na.rm=T)
 means2
-barplot(means2, beside=T, legend.text=c("Control", "Antisocial", "Hero")
+barplot(means2, beside=T, legend.text=c("Antisocial", "Control", "Prosocial")
        , ylab="Volunteering (#calls)"
         , args.legend=list(y=10.5)
        )
