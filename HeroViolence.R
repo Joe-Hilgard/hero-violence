@@ -1,4 +1,3 @@
-
 library(haven)
 source("~/GitHub/joe-package/joe-package.R")
 dat = read.delim("HeroViolence_Gibson.txt", stringsAsFactors = F)
@@ -26,8 +25,10 @@ dat$DV = dat$Calls; dat$DV[dat$DV >= 1] = 1
 library(pscl)
 zipmod = zeroinfl(Calls ~ Game * Request, data = dat)
 zinbmod = zeroinfl(Calls ~ Game * Request, data = dat, dist = "negbin")
+zinbmod2 = zeroinfl(Calls ~ GameOrdered * Request, data = dat, dist = "negbin")
 summary(zipmod)
 summary(zinbmod)
+summary(zinbmod2)
 
 # Bad models w/ violated assumptions of ANOVA ----
 badmodel1 = aov(Calls ~ Game * Request, data = dat) # bad b/c calls not normally distributed
