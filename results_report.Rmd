@@ -1,0 +1,95 @@
+---
+title: "Hero Violence"
+author: "Joe Hilgard"
+date: "June 7, 2017"
+output: html_document
+---
+
+## Data accounting
+
+The first copy of the data I have was archived on January 10th, 2015. It has 216 observations in total and 192 observations for "Calls". The 24 missing observations for "Calls" are each labeled as not having been intercepted. One subject is marked as zero calls but not intercepted.
+
+The second copy of the data I have was received Feb 19, 2016 and archived Feb 24. It has 204 observations in total and 190 observations for "Calls". The 14 missing observations for "Calls" are each labeled as not having been intercepted. One subject is marked as zero calls but not intercepted.
+
+I am a little nervous to see that the total N has decreased despite our collecting more data. When I asked about this before, I think I was told that some rows were removed in data cleaning as other rows were added in the new data collection. It is generally preferable not to delete rows from the master dataset, but rather to flag them for removal and to have an original master dataset and a cleaned dataset for analysis. 
+
+I would like it if we could account for the excluded observations, whatever the reason for their exclusion. I request the 21-word disclaimer on everything I review, which includes "We report [...] all data exclusions." It would be a little hypocritical of me to submit a paper without the same transparency about how many observations were excluded and why.
+
+It would also be helpful if we knew how many subjects were added after our first peek at the data.
+
+Okay, on to the main event.
+
+## Distribution
+
+The data are clearly not normally distributed. Many subjects do not offer to make calls, and among those that do, the number of calls offered is 1) strongly right-skewed and 2) shows spikes at multiples of 5, as you might expect.
+
+```{r}
+source("HeroViolence.R")
+# library(haven)
+# library(tidyverse)
+# dat.new <- read_sav("HeroViolenceData - FS 14 dataAdam.sav")
+ggplot(dat.new, aes(x = Calls, fill = factor(Game))) +
+  geom_histogram(position = "dodge", binwidth = 1)
+```
+
+With this in mind, ANOVA is probably not quite appropriate, because our residuals are highly non-normal.
+
+```{r}
+lm(Calls ~ Game * Request, data = dat.new) %>% 
+  augment() %>% 
+  ggplot(aes(x = .resid)) + geom_histogram()
+```
+
+Ideally, we would use a model that can better account for 1) the difference between making no calls and some calls and 2) the big right skew in the number of calls. 
+Treating the outcome as binary (yes calls vs. no calls) accounts for point 1 and is easy to implement as a chi-square test or a logistic regression.
+Using a Zero-Inflated Poisson or Negative Binomial distribution accounts for both points 1 and 2. These models check for group differences in responding 0 vs any other number, and they fit right-skewed count data.
+
+Alternatively, we could try a non-parametric test like the Kruskal-Wallis test that tests whether the medians of all groups are equal.
+
+### ANOVA
+
+Suppose we ignore the issues and just go ahead and run an ANOVA. For the effect of game, I get F(2, 183) = 3.20, p = .043. Neither game is significantly different from control, but taken together, the variance of the mean across the three groups is just statistically significant. 
+
+## Zero-inflated negative binomial
+
+Let's fit the more appropriate zero-inflated negative binomial. This model has two parts: The zero-inflation model, which estimates whether participants volunteer at all, and the count model, which estimates how many calls they offer when they do volunteer.
+
+```{r}
+summary(zinbmod)
+```
+
+When we do this, we don't see any significant effects of the games or request on either model. We do see a highly significant Log(theta) parameter, which means that the count data are overdispered, justifying the decision to use the negative binomial.
+
+We can try specifying a planned contrast, by which we expect antisocial-violent to be the least helpful (-1), prosocial-violent to be the most helpful (+1), and control to be somewhere in between. But this doesn't reveal a significant effect either.
+
+```{r}
+Anova(zinbmod.ordered)
+```
+
+
+## Kruskal-Wallis test
+The Kruskal-Wallis test of different group means is only marginally significant, chi-sq(2) = 5.09, p = .079. If we compare just the Gratuitous Violence and Hero-Violence groups, then we get a significant result, chi-sq(1) = 4.97, p = .026, but neither of the other pairwise tests are significant (p = .224, .262).
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

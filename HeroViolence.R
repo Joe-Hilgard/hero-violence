@@ -81,10 +81,11 @@ summary(zinbmod.ordered) # very sig overdispersion parameter & not much else
 # Bad models w/ violated assumptions of ANOVA ----
 # TODO: Specify dummy / contrast codes
 badmodel1 <- lm(Calls ~ Game * Request, 
-                contrasts = list(Game = contr.sum,
-                                 Request = contr.sum),
+                contrasts = list(Request = contr.sum),
                 data = dat) # bad b/c calls not normally distributed
-badmodel2 <- lm(Calls ~ Game * Request, data = dat[dat$Calls > 0,]) # same as above + ignores base-rate
+badmodel2 <- lm(Calls ~ Game * Request, 
+                contrasts = list(Request = contr.sum),
+                data = dat[dat$Calls > 0,]) # same as above + ignores base-rate
 
 # results of badmodel 1: number of calls
 Anova(badmodel1, type = 2) # an effect of game?
