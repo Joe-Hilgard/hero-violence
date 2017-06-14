@@ -7,7 +7,7 @@ library(BayesFactor)
 library(tidyverse)
 
 # read in data
-dat <- read.delim("HeroViolence_Gibson.txt", stringsAsFactors = F)
+dat <- read.delim("HeroViolence_Master.txt", stringsAsFactors = F)
 
 dim(dat)
 sapply(dat, FUN=class)
@@ -30,6 +30,9 @@ dat$GameNum = ifelse(dat$Game == "Antisocial", -1,
 dat$Request = factor(dat$Request, levels=c(1,2), labels=c("Help Red Cross", "Save Lives"))
 # Remove all not intercepted by confederate
 dat = filter(dat, Intercepted == 1)
+# Remove all data flagged as bad by CMU collaborators
+dat <- filter(dat, badgroup != 1)
+
 # Make binary response variable
 dat$DV = dat$Calls; dat$DV[dat$DV >= 1] = 1
 
@@ -89,7 +92,6 @@ badmodel2 <- lm(Calls ~ Game * Request,
 
 # results of badmodel 1: number of calls
 Anova(badmodel1, type = 2) # an effect of game?
-Anova(badmodel1, type = 3) # depends on Type II vs III sum of squares
 summary(badmodel1)
 
 # results of badmodel 2: number of calls among those volunteering at all
