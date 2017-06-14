@@ -1,0 +1,236 @@
+Subject	Date	Condition	Game	Request	Calls	callsyesno	intercepted	Location_filter	Season	Enjoy_Game	Finish	Game_Freq	Enjoy_Type	Interested	Distressed	Excited	Upset	Strong	Gulty	Scared	Hostile	Enthusiastic	Proud	Irritable	Alert	Ashamed	Inspired	Nervous	Determined	Attentive	Jittery	Active	Afraid	Gender	Purpose	Pos_Affect	Neg_Affect	Purpose_Qual	like	badgroup
+1	12/3/2013 0:00	3	3	1	0	0	1	1	1	3	1	1	2	2	3	2	3	1	3	3	3	3	1	3	3	2	3	5	3	3	3	2	2	2	1	23	30	nothing	5	
+2	12/3/2013 0:00	1	1	1	5	1	1	1	1	5	2	2	5	4	2	5	2	3	1	1	1	5	4	1	4	1	3	2	4	4	3	3	2	2	1	39	16	NO	10	
+3	12/3/2013 0:00	4	1	2	10	1	1	1	1	4	2	3	2	3	1	3	1	2	1	1	1	1	2	1	2	1	1	2	3	2	1	3	1	2	1	22	11	No	6	
+4	12/3/2013 0:00	2	2	1	5	1	1	1	1	2	1	4	2	3	2	2	1	1	2	1	4	2	1	1	4	2	1	2	1	3	3	4	1	1	1	22	19	To see how people reacted when having to shoot innocent people in a video game.	4	
+5	12/5/2013 0:00	6	3	2	3	1	1	1	1	4	1	4	3	4	1	4	1	4	1	1	3	4	5	1	4	1	4	3	4	5	3	4	1	1	1	42	16	video games and emotion	7	
+6	2/5/2014 0:00	5	2	2	0	0	1	1	1	3	1	2	2	3	2	1	3	1	2	2	1	1	1	2	4	3	1	3	2	4	1	4	2	2	1	22	21	The effect that violent video games have	5	
+7	2/5/2014 0:00	1	1	1	NA	NA	0	1	1	4	2	3	3	4	2	3	2	3	1	1	1	3	3	1	4	1	2	1	3	3	1	2	1	2	1	30	12	Wasn't sure	7	
+8	2/7/2014 0:00	4	1	2	5	1	1	1	1	4	2	6	3	4	1	5	2	4	1	1	1	4	4	1	1	1	3	1	4	4	2	4	1	1	1	37	12	To see how people reacted to a game they never played before. Or how different people show differnt emotions while playing video games.	7	
+9	2/12/2014 0:00	6	3	2	20	1	1	1	1	5	2	7	5	5	1	5	1	5	1	1	1	5	4	1	5	1	5	1	5	5	1	5	1	1	1	49	10	to see how video games affect you	10	
+10	2/12/2014 0:00	3	3	1	10	1	1	1	1	2	1	5	2	3	4	3	3	2	1	1	3	2	2	2	4	1	1	2	4	5	4	3	2	2	1	29	23	.	4	
+11	2/14/2014 0:00	2	2	1	NA	NA	0	1	1	4	2	4	3	3	2	4	1	3	2	1	1	4	2	2	3	1	1	2	3	2	5	3	1	1	1	28	18	no	7	
+12	2/14/2014 0:00	5	2	2	NA	NA	0	1	1	4	2	5	5	4	1	3	2	2	1	1	1	3	1	1	3	1	1	2	3	3	2	2	1	1	1	25	13	I didn't really know purpose of study.	9	
+13	2/14/2014 0:00	5	2	2	0	0	1	1	1	4	1	1	4	4	4	4	2	3	2	3	1	4	4	1	3	1	2	4	3	3	4	3	3	2	1	33	25	NO	8	
+14	2/14/2014 0:00	6	3	2	0	0	1	1	1	4	1	2	2	5	1	4	1	3	1	1	1	3	1	1	5	1	2	3	3	5	2	3	1	2	2	34	13	to determine the effect the game had on me and how i reacted/felt afterward.	6	
+15	2/19/2014 0:00	1	1	1	0	0	1	1	1	3	2	4	2	4	4	3	4	2	1	1	1	3	2	3	2	1	1	2	3	4	3	3	2	1	2	27	22	to uderstand the emotions of the patient when playing a video game	5	
+16	2/19/2014 0:00	4	1	2	0	0	1	1	1	2	2	5	2	3	2	2	2	1	1	1	1	1	1	1	4	3	1	1	3	5	3	4	1	1	2	25	16	To test ones ability to use real world experiences while driving in a virtual setting.	4	
+17	2/21/2014 0:00	2	2	1	0	0	1	1	1	4	2	6	4	4	1	2	2	1	3	1	1	1	1	1	5	1	1	1	4	4	1	2	1	1	2	25	13	to see if the violence of the no russian mission would cause me to become stressed or express a violent mood	8	
+18	2/21/2014 0:00	3	3	1	10	1	1	1	1	4	1	3	2	4	2	4	1	1	1	1	1	4	1	1	5	4	1	5	4	4	4	2	1	2	2	30	21	To see if playing video games affected the way we are hired.	6	
+19	2/21/2014 0:00	2	2	1	10	1	1	1	1	4	2	2	3	3	2	4	2	3	5	2	1	3	2	1	4	2	1	3	2	2	1	4	4	2	2	28	23	To see what peoples reactions and emoutions are during video games.	7	
+20	2/21/2014 0:00	4	1	2	10	1	1	1	1	4	2	1	4	4	4	4	2	4	1	1	1	4	2	4	4	1	1	4	4	4	2	4	1	2	1	35	21	to see if video games causes frustration or any sign of emotion	8	
+21	2/28/2014 0:00	1	1	1	0	0	1	1	1	3	1	4	4	3	2	3	4	3	2	1	3	2	1	4	4	2	3	3	4	4	4	4	1	1	2	31	26	For a psychology study.	7	
+22	2/28/2014 0:00	6	3	2	NA	NA	0	1	1	4	1	3	3	3	1	3	1	3	1	1	1	3	1	1	4	1	2	1	1	3	1	3	1	2	1	26	10	no	7	
+23	2/28/2014 0:00	3	3	1	NA	NA	0	1	1	3	2	2	2	3	1	3	3	2	1	1	4	4	1	1	4	1	3	1	3	3	1	4	1	2	1	30	15	To test my response to a video game.	5	
+24	3/19/2014 0:00	5	2	2	10	1	1	1	1	4	2	6	4	4	2	3	1	3	2	1	3	4	4	1	4	2	2	1	4	4	2	4	1	1	2	36	16	To determine effects of video games on behaviors and moods.	8	
+25	3/19/2014 0:00	4	1	2	0	0	1	1	1	4	2	6	3	3	2	4	1	2	1	1	1	3	2	1	4	1	2	1	3	3	1	4	1	1	2	30	11	To see how video games affect your emotions.	7	
+26	3/21/2014 0:00	1	1	1	1	1	1	1	1	4	2	2	5	4	2	3	1	3	1	2	1	4	4	2	4	2	5	2	4	5	1	4	1	1	1	40	15	To personally respond to the video games and how oue emoitions had to react to the video game. And to have a opprotunity to be inmursed into the game so that whatever you were doing it would seem so life like.	9	
+27	3/28/2014 0:00	6	3	2	10	1	1	1	1	3	1	1	2	2	3	3	1	4	1	3	4	4	4	4	5	3	2	5	4	4	4	3	4	2	1	35	32	No.	5	
+28	3/28/2014 0:00	2	2	1	0	0	1	1	1	3	2	7	4	4	2	3	2	1	3	1	1	2	1	2	2	2	1	1	1	2	1	2	1	1	1	19	16	To judge a person's emotional reaction to an event.	7	
+29	3/28/2014 0:00	5	2	2	7	1	1	1	1	4	1	3	4	4	1	4	1	3	3	1	4	3	2	1	5	2	2	1	4	4	4	4	1	2	2	35	19	"I thought the purpose of the study was to see how our emotions react to such violent video games. Especially since we were on the \bad\"" side and killing innocent people, it wanted to see how we would react to that."""	8	
+30	3/28/2014 0:00	3	3	1	3	1	1	1	1	4	1	6	3	4	2	4	2	1	1	1	1	2	1	1	2	1	1	1	2	2	1	2	1	1	1	21	12	The relationship between violent video games and emotion	7	
+31	4/2/2014 0:00	3	3	1	0	0	1	1	1	1	1	1	1	1	2	1	1	1	2	1	2	1	1	1	1	1	1	1	1	1	1	1	2	2	2	10	14	To see how I responded to the game	2	
+32	4/2/2014 0:00	2	2	1	0	0	1	1	1	4	1	4	5	3	2	1	2	3	2	1	1	1	1	1	1	3	1	2	5	5	1	1	1	1	1	22	16	I responded no	9	
+33	4/2/2014 0:00	4	1	2	0	0	1	1	1	4	2	4	1	3	1	3	1	3	1	1	1	4	4	1	4	1	3	1	2	3	1	2	1	1	1	31	10	It was to measure the level of enjoyment someone would experience playing a game.	5	
+34	4/4/2014 0:00	3	3	1	0	0	1	1	1	1	1	2	1	1	1	1	1	1	1	1	1	1	1	1	2	1	1	1	1	1	2	1	1	2	1	11	11	i said no	2	
+35	4/4/2014 0:00	4	1	2	0	0	1	1	1	3	2	2	3	4	3	3	2	2	1	2	1	3	2	1	4	2	1	3	1	4	4	4	1	2	1	28	20	I did not know the purpose but I would guess about reaction time	6	
+36	4/4/2014 0:00	6	3	2	0	0	1	1	1	4	2	6	3	3	3	3	1	3	1	1	1	2	3	1	4	1	3	1	3	4	3	4	1	1	2	32	14	The purpose of the study was to see the body's reaction to violent or disturbing images shown in video games.	7	
+37	4/4/2014 0:00	2	2	1	0	0	1	1	1	4	1	1	2	5	4	4	1	2	4	1	2	1	1	1	5	1	1	1	3	5	1	5	1	2	1	32	17	What video games are portraying	6	
+38	4/4/2014 0:00	5	2	2	0	0	1	1	1	3	2	5	4	3	4	2	1	2	3	1	1	2	1	3	4	3	1	1	1	3	2	2	1	1	1	21	20	I responded no.	7	
+39	4/9/2014 0:00	1	1	1	0	0	1	1	1	4	1	2	4	3	1	4	1	3	1	1	1	3	4	1	2	1	1	2	4	2	5	4	1	2	2	30	15	To test emotions while being aroused playing a video game.	8	
+40	4/9/2014 0:00	6	3	2	5	1	1	1	1	2	1	1	1	3	3	2	1	3	1	1	1	1	1	1	5	3	1	1	4	4	3	4	2	2	1	28	17	To see how violence and the state of anxiety correlate.	3	
+41	4/9/2014 0:00	3	3	1	0	0	1	1	1	4	2	1	5	4	1	4	1	3	1	1	1	3	3	1	3	1	2	1	3	3	4	4	1	1	1	32	13	How video games effect a persons feelings.	9	
+42	4/9/2014 0:00	2	2	1	4	1	1	1	1	4	2	5	3	4	1	1	1	3	1	1	1	1	1	1	3	1	1	1	1	4	1	3	1	1	1	22	10	N/A	7	
+43	4/11/2014 0:00	5	2	2	0	0	1	1	1	3	1	2	2	3	1	1	1	1	1	1	1	2	1	1	3	1	1	1	1	3	1	1	1	2	2	17	10	It was to see if playing a video game would affect our emotions in some way.	5	
+44	4/11/2014 0:00	1	1	1	0	0	1	1	1	5	2	1	3	3	2	4	3	4	1	1	1	4	3	2	4	1	1	3	4	5	3	4	2	2	1	36	19	I responded No.	8	
+45	4/11/2014 0:00	3	3	1	5	1	1	1	1	4	2	5	3	2	1	2	1	3	1	1	2	3	4	1	5	1	1	1	3	4	3	4	1	1	2	31	13	Im pretty sure the study was designed to see whether or not playing violent video games could provoke certain responses such as excitement or hostility and the intent was to see if there was a correlation between video games and aroused emotional states.	7	
+46	4/11/2014 0:00	2	2	1	0	0	1	1	1	1	1	2	1	2	1	2	2	2	1	1	2	2	1	2	1	1	1	1	1	2	1	2	1	2	2	16	13	To   test  how   people  feel while playing  games	2	
+47	4/16/2014 0:00	5	2	2	0	0	1	1	1	3	2	3	3	3	2	4	3	3	2	3	2	4	2	1	5	2	1	1	3	5	4	5	1	1	2	35	21	hhy8hh*uuu*uuhu+*u++hhhhhhhhhhhhhhh*uuu*uuhu+*u++hhhhhhhhh	6	
+48	4/16/2014 0:00	6	3	2	2	1	1	1	1	1	1	1	1	1	3	1	2	1	1	1	1	1	1	2	1	1	1	1	1	1	1	1	1	2	2	10	14	TO ASSESS HOW ENGAGING IN VIDEO GAMES WOULD ELICIT EMOTIONS.	2	
+49	4/16/2014 0:00	3	3	1	NA	NA	0	1	1	4	1	2	3	3	1	4	1	1	1	1	1	3	1	1	2	1	1	1	2	3	2	3	1	2	1	23	11	The response to stress on video games/ priming one with the 'violent video game' then taking  the survey to gauge violent tendencies or emotional levels of stress	7	
+50	4/21/2014 0:00	4	1	2	0	0	1	1	1	4	2	4	3	3	1	5	1	4	2	1	2	4	4	2	5	1	4	1	4	4	2	5	1	1	1	42	14	To see how playing video games makes people feel	7	
+51	4/22/2014 0:00	1	1	1	NA	NA	0	1	1	4	2	2	3	4	2	4	1	3	1	1	2	4	3	3	3	1	2	2	4	4	4	5	1	1	1	36	18	N/A	7	
+52	4/22/2014 0:00	2	2	1	0	0	1	1	1	2	2	2	2	1	2	2	1	1	4	3	1	1	1	1	1	3	1	2	1	3	2	2	2	2	1	14	21	to see how you feel after playing a certain type of game	4	
+53	4/22/2014 0:00	4	1	2	5	1	1	1	1	4	2	5	4	4	1	4	1	4	1	1	1	5	4	1	4	1	5	1	4	4	1	4	1	1	1	42	10	na	8	
+54	4/22/2014 0:00	5	2	2	5	1	1	1	1	3	2	4	4	4	2	3	1	1	1	1	1	3	1	1	4	1	1	1	2	3	2	3	1	1	1	25	12	"To determine whether or not video games elicit a negative, hostile, bellicose response from specific demographics, whether thats correlated with gender, class, etc."	7	
+55	4/23/2014 0:00	6	3	2	0	0	1	1	1	3	1	1	1	2	3	3	1	3	1	1	3	2	1	3	5	1	1	1	5	5	5	5	1	2	1	32	20	to see if playing a video game makes you more attentive or alert or to see what emotions if produces	4	
+56	4/25/2014 0:00	1	1	1	4	1	1	1	1	3	1	1	2	3	2	4	2	4	1	2	3	4	4	2	5	3	4	2	5	5	3	5	2	2	1	43	22	Hand eye coordination....lol	5	
+57	4/25/2014 0:00	3	3	1	0	0	1	1	1	3	1	5	3	3	2	3	2	3	1	1	1	3	2	2	4	3	1	1	4	5	1	3	1	1	1	31	15	no	6	
+58	4/25/2014 0:00	5	2	2	0	0	1	1	1	4	1	2	2	3	3	3	1	1	2	2	2	3	2	2	4	1	2	1	2	3	3	3	1	2	2	26	18	The purpose of this study was to relate our emotions to video games to see if we found enjoyment from the video game	6	
+59	4/25/2014 0:00	5	2	2	0	0	1	1	1	3	1	2	2	2	1	2	1	1	1	1	1	2	1	1	2	2	1	1	1	1	1	2	1	2	2	15	11	To see the emotions that happen when a person plays a video game.	5	
+60	4/25/2014 0:00	3	3	1	0	0	1	1	1	3	1	3	1	4	2	3	1	3	1	1	2	3	3	2	4	1	2	1	3	3	3	3	1	1	2	31	15	To determine the enjoyability of video games.	4	
+61	4/29/2014 0:00	1	1	1	5	1	1	1	1	4	1	5	1	4	1	3	1	3	1	1	1	3	3	1	4	1	2	1	4	3	1	2	1	1	2	31	10	To determine if one has excitement while they play a video game.	5	
+62	4/29/2014 0:00	6	3	2	10	1	1	1	1	1	1	2	1	2	4	3	4	1	1	1	1	3	1	3	3	3	1	4	1	3	4	1	1	2	1	19	26	responded no.	2	
+63	4/25/2014 0:00	2	2	1	0	0	1	1	1	3	1	2	3	3	2	4	3	3	2	2	1	3	3	2	4	2	3	2	4	4	4	4	2	2	1	35	22	to see how video games effect my mood	6	
+64	4/29/2014 0:00	6	3	2	NA	NA	0	1	1	3	2	5	5	4	1	4	1	3	1	1	1	4	3	1	5	1	3	1	5	5	1	4	1	1	1	40	10	To better understand subjects feelings after playing an uncomfortable or emotionally challenging gameplay sequence	8	
+65	4/29/2014 0:00	1	1	1	10	1	1	1	1	4	2	2	3	2	1	3	1	3	1	1	1	3	4	1	4	1	2	1	4	4	1	1	1	2	1	30	10	I have no idea what the study entailed. So I have nothing to say.	7	
+66	4/30/2014 0:00	6	3	2	0	0	1	1	1	3	1	2	2	2	1	2	1	1	1	1	1	2	2	2	4	1	2	1	1	3	3	3	1	1	2	22	13	Possibly to see whether or not playing hostile video games promoted similar feelings.	5	
+67	4/30/2014 0:00	5	2	2	0	0	1	1	1	4	2	3	3	3	2	4	1	3	2	1	1	3	1	1	4	1	2	1	3	5	2	3	1	1	1	31	13	To see how people react to different situations even in video games	7	
+70	3/18/2014 15:57	6	3	2	0	0	1	2	1	3	2	2	3	3	1	1	1	1	1	1	1	2	1	1	4	1	1	1	2	4	1	1	1	2	2	20	10		6	
+71	3/20/2014 15:48	5	2	2	5	1	1	2	1	1	1	5	4	2	1	3	NA	1	1	1	1	1	1	3	NA	1	1	1	1	1	3	1	1	2	2	12	13		5	
+72	4/1/2014 16:41	4	1	2	10	1	1	2	1	4	1	4	4	4	3	4	1	3	3	1	1	3	4	1	5	2	3	1	5	5	2	4	1	2	1	40	16	To test how video games effect our emotions.	8	
+73	4/3/2014 15:52	3	3	1	0	0	1	2	1	1	2	1	1	1	5	1	4	1	1	1	5	1	1	3	NA	4	1	1	1	3	1	1	1	1	2	11	26		2	
+74	4/3/2014 17:03	2	2	1	0	0	1	2	1	3	1	4	5	4	3	2	3	1	3	3	1	1	1	3	4	3	1	3	2	4	1	1	1	2	1	21	24	I have played the game before and as soon as that level was selected I knew it would have something to do with my reaction to the hundreds of innocent people killed.  I know there is controversy with that level. So much so that they give the option to not  even play it.	8	
+75	4/3/2014 17:30	1	1	1	0	0	1	2	1	2	2	3	1	3	2	2	3	2	1	1	4	3	1	3	3	4	2	1	5	4	3	5	1	2	2	30	23		3	
+76	4/8/2014 15:04	6	3	2	20	1	1	2	1	2	2	2	1	2	1	3	1	3	1	1	1	2	1	1	4	1	1	1	3	5	1	4	1	1	2	28	10		3	
+77	4/8/2014 17:04	5	2	2	6	1	1	2	1	1	2	2	1	1	2	1	2	1	1	1	1	1	1	3	2	1	1	1	1	2	1	1	1	1	1	12	14	I thought the purpose of the experiment is to see the effect violent video games has on an individual's emotions.	2	
+78	4/10/2014 15:53	4	1	2	7	1	1	2	1	4	2	1	4	4	1	4	3	4	1	1	5	4	3	3	4	1	5	4	5	4	4	4	1	1	1	41	24	To identify the range of emotions we felt when playing games.	8	
+79	4/10/2014 16:33	3	3	1	0	0	1	2	1	4	1	6	3	3	2	2	1	2	1	1	1	3	3	3	4	2	2	1	3	4	1	1	1	2	2	27	14		7	
+80	4/10/2014 17:20	2	2	1	0	0	1	2	1	3	1	3	3	2	3	2	1	3	1	1	1	2	2	1	4	1	1	1	3	4	1	2	1	2	1	25	12	To test what my emotional response was to violent videogames.	6	
+81	4/10/2014 17:37	1	1	1	0	0	0	2	1	3	1	4	1	1	1	3	1	3	1	1	1	3	4	1	5	1	1	1	2	4	1	5	1	2	1	31	10	I thought the purpose of the experiment was to see a certain emotional response that was being looked for after playing the video game. I didn't know the purpose was to see my emotional states overall.	4	
+82	4/15/2014 15:51	6	3	2	NA	NA	0	2	1	4	2	5	3	3	3	3	2	2	2	1	3	4	2	2	4	2	1	2	4	4	2	3	1	2	2	30	20		7	
+83	4/15/2014 16:30	5	2	2	0	0	1	2	1	2	1	6	3	3	2	1	2	1	2	1	1	1	1	1	2	2	1	1	1	3	1	4	1	2	2	18	14		5	
+84	4/15/2014 16:59	4	1	2	0	0	1	2	1	2	2	6	2	2	3	2	3	2	1	1	1	1	1	2	2	2	1	2	3	2	3	2	2	2	2	18	20		4	
+85	4/15/2014 17:29	3	3	1	10	1	1	2	1	3	2	5	4	3	1	2	1	3	1	1	1	3	3	1	4	1	3	1	4	4	3	1	1	2	2	30	12		7	
+86	4/17/2014 15:42	2	2	1	0	0	1	2	1	3	1	3	3	3	1	3	1	1	1	1	1	3	1	1	4	1	1	1	4	NA	3	3	1	2	2	23	12		6	
+87	4/22/2014 15:52	1	1	1	1	1	1	2	1	2	2	4	2	3	2	1	1	1	1	1	2	2	1	3	1	2	1	1	3	1	1	1	1	2	2	15	15		4	
+88	4/22/2014 16:23	6	3	2	0	0	1	2	1	2	2	2	2	2	2	1	2	1	2	3	1	1	1	1	3	1	1	2	3	2	3	2	3	1	2	17	20		4	
+89	4/22/2014 16:53	5	2	2	0	0	1	2	1	2	2	1	1	3	2	2	1	1	1	2	2	2	1	3	4	1	1	2	2	3	4	1	1	1	2	20	19		3	
+90	4/22/2014 17:23	4	1	2	0	0	1	2	1	3	2	3	1	3	1	2	1	1	1	1	1	1	1	2	1	1	1	1	1	2	2	2	1	2	2	15	12		4	
+91	4/24/2014 15:54	3	3	1	0	0	1	2	1	3	1	4	3	3	1	3	1	2	1	1	1	3	3	1	4	1	2	1	1	1	1	2	1	2	1	24	10	I thought the purpose of the study was to play a violent video game and then answer questions to see if there is a connection between violent video games and emotions.	6	
+92	4/24/2014 16:27	2	2	1	0	0	1	2	1	1	2	4	1	1	1	1	1	1	4	1	1	5	1	1	1	1	1	1	3	3	3	1	1	1	1	18	15	to see the successful of game will cause good effect to emotion.	2	
+93	4/24/2014 17:27	1	1	1	0	0	1	2	1	2	1	6	1	2	1	1	1	2	1	1	1	2	2	1	3	1	1	1	3	3	2	3	1	2	1	22	11	The purpose was to see how people feel when playing video games. I think it also depends a lot on how much you play video games anyways and the type of game.	3	
+94	4/29/2014 15:45	6	3	2	5	1	1	2	1	3	2	1	3	4	1	4	1	1	1	1	2	3	1	2	3	1	1	1	2	3	1	2	1	1	1	24	12		6	
+95	4/29/2014 16:59	5	2	2	0	0	1	2	1	3	2	2	2	4	4	4	2	2	1	2	3	3	2	2	4	1	2	3	3	4	2	3	2	1	2	31	22		5	
+96	4/29/2014 17:26	4	1	2	5	1	1	2	1	2	2	2	2	3	2	1	2	1	1	1	2	1	1	1	2	1	1	1	2	1	2	1	1	1	2	14	14		4	
+97	5/1/2014 15:49	3	3	1	0	0	1	2	1	3	2	4	4	3	2	3	2	3	1	1	1	2	3	1	3	2	1	1	4	3	1	4	1	2	1	29	13	"To see how playing \violent\"" video games effect an individual's emotions."""	7	
+98	5/1/2014 16:24	2	2	1	0	0	1	2	1	3	1	3	4	3	4	2	5	1	5	3	4	2	1	2	3	4	1	4	1	3	3	3	4	2	2	20	38		7	
+99	5/1/2014 16:52	1	1	1	0	0	1	2	1	1	1	4	1	2	3	2	3	3	1	1	2	1	1	4	3	1	1	2	3	2	2	3	1	2	2	21	20		2	
+100	5/6/2014 15:15	6	3	2	0	0	1	2	1	4	2	2	3	5	4	5	2	2	1	1	1	2	1	3	5	1	1	1	3	1	1	5	1	2	1	30	16	To see what are emotions are going to be like after we play a violent video game. Specifically if we felt more enraged after playing the video game.	7	
+101	5/6/2014 17:24	5	2	2	0	0	1	2	1	2	2	4	2	3	1	3	1	3	1	1	1	2	1	2	2	1	1	1	2	2	1	2	1	2	1	21	11	"to test whether killing all of those innocent people would ilicit an emointion.  Trying it a second time was a test to see if you would kill all those people again, maybe even kill the guy for killing those people and you."	4	
+102	5/8/2014 15:47	4	1	2	1	1	1	2	1	2	1	6	1	1	1	1	1	1	1	1	1	1	1	1	4	1	1	1	1	4	1	1	1	2	2	16	10		3	
+103	5/8/2014 16:30	3	3	1	0	0	1	2	1	4	2	4	4	4	1	4	1	4	1	1	1	4	4	1	1	1	3	1	4	4	1	4	1	2	2	36	10		8	
+104	5/8/2014 17:25	2	2	1	0	0	1	2	1	3	1	5	3	3	2	3	2	2	5	1	1	2	1	2	4	5	2	2	1	4	3	2	1	2	2	24	24		6	
+105	6/19/2014 15:09	1	1	1	0	0	1	2	2	2	2	2	3	2	2	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	2	1	11	11	the people's emotions and changes when they playing the video games	5	
+106	6/24/2014 14:50	6	3	2	3	1	1	2	2	3	2	4	3	2	2	3	4	3	1	1	2	3	3	4	4	2	1	1	3	3	3	3	1	2	1	28	21	to know the level of happiness after playing games	6	
+107	6/24/2014 15:30	5	2	2	5	1	1	2	2	2	2	1	1	1	1	1	1	2	3	1	1	1	1	1	2	1	1	1	1	1	1	2	1	1	1	13	12	to see what emotions are triggered while playing violent video games or to see if they have a huge impact on you after you play them	3	
+108	6/26/2014 14:45	4	1	2	3	1	1	2	2	3	2	4	1	4	3	3	1	3	1	1	1	2	1	2	1	1	2	3	3	3	2	2	1	2	2	24	16		4	
+109	6/26/2014 15:30	3	3	1	0	0	1	2	2	4	1	5	4	4	1	3	1	1	1	1	1	2	4	1	2	1	1	1	1	4	1	1	1	2	2	23	10		8	
+110	7/1/2014 14:43	2	2	1	0	0	1	2	2	3	2	1	1	2	1	1	2	1	1	1	1	1	1	1	3	1	1	1	1	2	1	1	1	1	1	14	11	Playing a video game and how it makes you feel afterwards.	4	
+111	7/1/2014 15:57	1	1	1	0	0	1	2	2	3	1	4	2	2	3	3	2	1	1	1	1	2	1	1	3	1	2	1	4	3	4	4	1	2	2	25	16		5	
+112	7/3/2014 14:47	6	3	2	5	1	1	2	2	2	2	3	2	4	4	4	2	2	2	2	2	3	1	3	4	3	1	2	4	NA	3	2	2	1	2	25	25		4	
+113	7/3/2014 15:25	5	2	2	10	1	1	2	2	3	1	5	4	3	1	1	1	2	2	1	1	1	1	1	3	1	1	2	1	3	3	2	1	2	2	18	14		7	
+114	7/10/2014 14:52	4	1	2	0	0	1	2	2	3	1	4	2	3	1	2	1	2	1	1	1	1	2	1	4	1	1	2	3	4	2	1	1	2	2	23	12		5	
+115	7/10/2014 15:22	3	3	1	0	0	1	2	2	3	2	5	4	3	3	2	3	2	1	1	2	3	3	3	3	1	2	2	3	3	3	3	2	2	2	27	21		7	
+116	7/22/2014 15:34	2	2	1	0	0	1	2	2	2	2	2	2	3	4	2	3	2	4	3	2	2	1	2	4	3	2	3	2	4	4	3	2	1	1	25	30	Your attitude and feelings after playing a violent videogame	4	
+117	7/24/2014 15:00	1	1	1	0	0	1	2	2	4	2	1	3	4	2	3	1	2	1	1	1	1	1	1	3	1	2	1	3	4	2	3	1	2	2	26	12		7	
+118	7/24/2014 15:28	6	3	2	0	0	1	2	2	3	2	2	1	2	3	2	3	2	3	1	1	2	1	1	1	2	1	1	3	3	3	3	1	1	2	20	19		4	
+119	9/29/2014 14:14	5	2	2	10	1	1	2	3	3	2	1	1	2	2	2	1	1	1	2	2	1	1	2	1	1	1	2	2	1	1	1	1	1	2	13	15		4	
+120	9/29/2014 15:21	4	1	2	20	1	1	2	3	3	2	2	2	3	1	3	1	1	1	1	1	2	1	1	2	1	1	1	1	3	1	2	1	1	2	19	10		5	
+121	9/29/2014 15:25	3	3	1	0	0	1	2	3	4	2	6	4	5	3	5	1	4	1	1	1	2	2	1	4	1	2	1	5	4	2	2	1	2	2	35	13		8	
+122	9/29/2014 15:58	2	2	1	5	1	1	2	3	3	1	4	2	2	2	1	1	2	2	2	2	2	1	2	2	2	2	2	3	3	3	3	1	2	2	21	19		5	
+123	9/29/2014 16:29	1	1	1	0	0	1	2	3	3	1	4	3	4	1	4	1	1	1	1	1	2	2	1	5	1	2	2	3	4	4	3	1	2	2	30	14		6	
+124	9/30/2014 17:23	6	3	2	10	1	1	2	3	4	2	3	4	4	2	3	1	2	1	1	2	2	1	3	4	1	1	2	4	4	2	3	1	2	1	28	16	/  / I thought the study was about how we felt emotionally after playing a violent game. Whether we felt violent from laying the game or if it didn't bother us at all.	8	
+125	10/1/2014 15:30	5	2	2	NA	NA	0	2	3	2	2	1	1	1	1	1	1	1	1	1	NA	1	1	1	4	1	1	1	1	4	1	4	1	1	2	19	9		3	
+126	10/2/2014 17:11	4	1	2	0	0	1	2	3	2	1	1	2	3	1	3	3	3	3	1	1	2	2	2	3	3	2	4	4	3	2	1	1	1	2	26	21		4	
+127	10/3/2014 13:50	3	3	1	10	1	1	2	3	2	2	1	1	2	3	1	3	1	1	1	2	1	1	3	4	NA	2	3	3	4	4	3	1	1	1	22	21	I think the purpose of this study was to be able to associate emotions with different video games. I think this was also used to determine how different genders react in different situations with their different emotions.	3	
+128	10/3/2014 13:56	2	2	1	0	0	1	2	3	4	2	2	3	4	4	3	1	4	1	1	3	4	4	3	1	1	2	1	1	1	1	3	1	2	1	27	17	to see how people behive while playing games	7	
+129	10/6/2014 14:48	1	1	1	0	0	1	2	3	4	1	2	3	4	2	4	1	1	1	1	1	1	1	1	3	1	1	1	1	3	2	1	1	1	1	20	12	emotional response to video games	7	
+130	10/6/2014 15:20	6	3	2	5	1	1	2	3	1	2	1	1	1	3	1	2	1	1	1	1	1	1	4	2	1	1	1	2	3	3	3	1	1	1	16	18	To evaluate my emotions while playing the video game.	2	
+131	10/6/2014 15:26	5	2	2	5	1	1	2	3	3	1	5	4	3	2	3	4	3	3	2	4	1	1	2	3	2	1	2	1	2	1	1	2	2	2	19	24		7	
+132	10/6/2014 16:26	4	1	2	0	0	1	2	3	2	2	4	3	4	3	3	1	3	1	1	1	3	2	1	4	1	1	1	2	4	2	2	1	2	1	28	13	to show how video games can cause a change in emotions	5	
+133	10/7/2014 17:21	3	3	1	20	1	1	2	3	5	2	2	5	4	3	1	1	2	1	1	1	2	3	1	2	1	2	1	4	3	2	3	1	2	2	26	13		10	
+134	10/8/2014 15:18	2	2	1	0	0	1	2	3	4	1	5	2	4	2	4	1	2	1	1	1	1	2	1	3	1	1	2	1	2	2	2	1	2	1	22	13	The purpose of this study was to see if playing a violent game would affect my mood	6	
+135	10/8/2014 16:29	1	1	1	0	0	1	2	3	4	2	5	3	3	1	2	1	2	1	1	1	2	3	1	3	1	1	1	2	3	1	2	1	2	2	23	10		7	
+136	10/8/2014 16:59	6	3	2	0	0	1	2	3	4	2	2	4	4	2	4	1	4	1	1	1	3	2	4	4	1	4	2	5	5	3	3	1	2	1	38	17	To see how my emotions were during the game play and see if i enjoyed it	8	
+137	10/8/2014 17:57	5	2	2	10	1	1	2	3	4	2	1	2	4	1	3	2	3	1	1	1	3	5	2	5	1	1	1	5	5	2	3	1	1	2	37	13		6	
+138	10/9/2014 16:53	4	1	2	0	0	1	2	3	3	1	2	3	2	3	2	1	2	1	1	1	1	1	3	1	1	1	2	2	2	1	2	1	1	1	16	15	To understand how video games make people feel and how video games affect our emotions in general.	6	
+139	10/10/2014 13:52	3	3	1	NA	NA	0	2	3	4	2	4	4	3	1	3	1	3	1	1	1	3	2	1	3	1	1	1	2	3	1	2	1	2	2	25	10		8	
+140	10/10/2014 14:20	2	2	1	0	0	1	2	3	4	1	5	5	4	1	2	1	2	1	1	1	3	2	1	2	1	1	1	2	4	1	2	1	2	2	24	10		9	
+141	10/10/2014 14:52	1	1	1	0	0	1	2	3	1	1	2	1	2	3	1	2	3	2	1	1	2	2	3	3	1	3	1	2	2	1	3	1	1	2	23	16		2	
+142	10/13/2014 15:22	6	3	2	0	0	1	2	3	2	2	1	1	1	2	1	1	1	2	2	1	1	1	2	3	1	1	3	2	2	2	2	2	1	2	15	18		3	
+143	10/13/2014 15:26	5	2	2	0	0	1	2	3	5	2	3	4	2	1	2	1	1	1	1	2	1	1	1	4	1	1	1	1	3	3	3	1	2	2	19	13		9	
+144	10/13/2014 16:22	4	1	2	0	0	1	2	3	2	1	2	3	3	3	1	2	1	1	1	1	2	1	3	2	1	1	2	4	3	4	2	1	2	2	20	19		5	
+145	10/13/2014 16:49	3	3	1	0	0	1	2	3	4	2	2	2	4	3	4	1	3	1	1	2	2	1	1	5	1	1	2	5	5	4	2	2	1	1	32	18	To see if the game creates aggression or anger. Maybe to see if the game causes people to want to do real-life shootings?	6	
+146	10/14/2014 16:58	2	2	1	2	1	1	2	3	4	1	7	4	4	1	4	1	3	1	1	1	4	1	1	4	1	3	1	4	4	1	4	1	2	1	35	10	What i saw was when we were playing the second level i feel the study was trying to see if we would shoot up the people. because the game says to follow the person but it doesnt say you have to shoot all the people. I feel its trying to see if certain per sonalities would shoot all the people or just follow.	8	
+147	10/15/2014 16:30	1	1	1	1	1	1	2	3	2	2	3	2	2	1	2	1	1	1	1	2	2	3	3	3	2	2	1	4	3	1	2	1	2	2	24	14		4	
+148	10/15/2014 17:27	6	3	2	0	0	1	2	3	2	1	5	4	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	2	1	1	3	1	2	1	13	10	I believe the goal of this study is to find what affect violent video games has on the mind. Specifically why we feel joy from completing the violent acts.	6	
+149	10/15/2014 18:19	5	2	2	5	1	1	2	3	4	1	6	4	4	1	5	1	2	2	1	2	2	1	1	1	1	1	1	1	1	1	3	1	2	1	21	12	The purpose was to see how violent video games may affect an individual's emotions.	8	
+150	10/16/2014 17:19	4	1	2	3	1	1	2	3	4	1	3	5	4	1	3	1	2	1	1	1	4	3	1	3	1	2	1	2	4	2	3	1	2	2	30	11		9	
+151	10/17/2014 13:13	3	3	1	0	0	1	2	3	3	2	4	2	4	1	3	2	1	1	1	1	3	1	2	2	1	1	1	2	3	1	3	1	2	2	23	12		5	
+152	10/17/2014 13:54	2	2	1	0	0	1	2	3	3	1	4	2	3	4	4	4	2	4	2	1	1	1	1	4	4	1	4	3	4	4	3	2	1	1	26	30	To examine the correlation between video games and the emotions that are felt by the people playing the games.	5	
+153	10/17/2014 14:27	1	1	1	0	0	1	2	3	2	1	7	2	2	1	1	1	1	1	1	1	1	1	1	4	1	1	1	1	4	1	4	1	2	1	20	10	Finding out the participant's emotions after playing a video game	4	
+154	10/17/2014 14:56	6	3	2	0	0	1	2	3	1	2	1	1	1	2	1	1	1	1	1	1	1	1	4	2	1	1	1	1	1	1	1	1	1	2	11	14		2	
+155	10/20/2014 14:17	5	2	2	NA	NA	0	2	3	3	1	2	2	3	2	2	3	3	3	3	4	2	1	1	4	2	1	2	3	4	2	2	2	1	2	25	24		5	
+156	10/20/2014 14:51	4	1	2	0	0	1	2	3	4	2	4	3	3	1	3	1	2	1	1	1	3	2	4	2	1	1	1	3	1	2	3	1	2	2	23	14		7	
+157	10/20/2014 15:28	3	3	1	5	1	1	2	3	4	1	5	5	5	2	4	1	4	4	2	3	4	4	1	5	1	4	1	5	5	4	5	1	2	2	45	20		9	
+158	10/20/2014 15:53	2	2	1	10	1	1	2	3	4	1	6	5	4	2	3	1	3	1	1	1	3	3	1	3	1	1	1	3	3	1	3	1	2	1	29	11	"After the acclimation to the game, the mission chosen was \No Russian.\"" This mission was most likely chosen due to the fact of in the game you are in an airport and killing many airport passengers. The purpose of this study i believe was to tell if after  playing a violent video game as such, if the person who had taken part of the study was affected in any way given the feelings and emotions rati"""	9	
+159	10/20/2014 16:29	1	1	1	0	0	1	2	3	1	2	5	1	1	1	1	1	1	1	1	1	1	1	2	3	1	1	1	1	3	1	1	1	2	2	14	11		2	
+160	10/21/2014 17:20	6	3	2	2	1	1	2	3	4	2	5	5	3	1	3	2	1	1	1	2	1	1	1	4	1	1	2	1	4	1	2	1	2	1	21	13	How video games influenced and affected your emotions.	9	
+161	10/22/2014 15:30	5	2	2	0	0	1	2	3	4	1	5	2	5	2	3	1	3	2	1	1	1	1	1	5	2	1	1	3	5	4	4	1	2	1	31	16	"The study was intended to find out if playing video games has an affect on the human mind. Violent video games are chosen specifically for this study because they're the most controversial. There have been claims that violent games breed violent individua ls, so measuring emotions after this game is one way of discovering whether this is true."	6	
+162	10/22/2014 16:14	4	1	2	0	0	1	2	3	1	1	1	1	2	2	2	1	1	1	1	1	2	1	2	2	1	1	1	1	2	1	1	1	2	2	15	12		2	
+163	10/22/2014 16:51	3	3	1	5	1	1	2	3	2	2	1	1	1	1	1	1	1	1	1	3	1	1	1	2	1	1	1	2	2	1	1	1	1	2	13	12		3	
+164	10/22/2014 17:26	2	2	1	0	0	1	2	3	1	2	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	2	10	10		2	
+165	10/22/2014 17:52	1	1	1	0	0	1	2	3	2	1	5	1	2	1	1	1	1	1	1	1	1	2	1	1	1	1	1	1	2	1	1	1	1	1	13	10	The effect of certain genres of video games and the emotions they invoke in the player.	3	
+166	10/23/2014 17:29	6	3	2	5	1	1	2	3	5	1	4	5	5	1	4	1	3	2	1	2	4	4	1	5	1	3	1	5	5	4	4	1	2	2	42	15	N/A	10	
+167	10/27/2014 14:49	5	2	2	0	0	1	2	3	4	1	3	5	4	2	3	1	2	1	2	1	2	1	1	5	1	1	3	3	5	1	3	1	2	2	29	14		9	
+168	10/27/2014 15:20	4	1	2	0	0	1	2	3	4	1	3	3	4	1	1	1	1	1	1	1	2	1	1	2	1	1	1	1	2	1	2	1	2	2	17	10		7	
+169	10/27/2014 15:47	3	3	1	10	1	1	2	3	4	1	2	5	4	3	4	3	3	2	2	2	3	4	4	4	3	3	2	4	4	3	4	2	2	2	37	26		9	
+170	10/27/2014 16:15	2	2	1	0	0	1	2	3	2	1	4	4	2	1	1	2	1	2	1	1	1	1	1	1	1	1	1	1	1	1	1	1	2	1	11	12	"A little bit, I think maybe the purpose was to see how peoples emotions are after playing a violent video game where your character is doing something that would go against most peoples morals: to determine i guess if you felt more hostile because of play ing the game im not entirely sure."	6	
+171	10/27/2014 16:47	1	1	1	0	0	1	2	3	3	1	3	4	4	3	4	2	3	1	1	2	4	3	2	5	1	4	3	5	5	4	5	1	1	2	42	20		7	
+172	10/28/2014 17:29	6	3	2	4	1	1	2	3	4	2	6	5	4	2	4	2	3	1	1	1	2	1	2	3	1	1	1	4	4	1	1	1	2	1	27	13	I read the purpose of the experiment before I began playing the video game.	9	
+173	10/29/2014 15:44	5	2	2	0	0	1	2	3	3	1	3	2	3	2	2	1	1	3	1	3	1	1	1	4	1	1	1	2	4	2	1	1	1	1	20	16	The purpose was to examine how a person feels feel while they play video games.	5	
+174	10/29/2014 16:25	4	1	2	0	0	1	2	3	1	1	3	1	1	3	2	4	3	1	1	2	2	3	3	2	1	1	1	5	4	1	3	1	1	1	26	18	To view how i reacted to playing the video game. To also see what kind of emotions i would express while playing the video game.	2	
+175	10/29/2014 16:56	3	3	1	0	0	1	2	3	3	2	4	3	3	2	3	1	1	1	1	1	1	1	2	2	1	1	1	1	3	1	1	1	2	1	17	12	The effect that violent video games has on mood and behavior.	6	
+176	10/29/2014 18:04	2	2	1	0	0	1	2	3	5	1	7	4	4	3	4	1	3	1	1	1	4	3	2	4	1	2	1	4	4	1	2	1	2	1	34	13	the studys purpose was to examine the behavior after playing video games and how they affect mood.	9	
+177	10/31/2014 13:12	1	1	1	5	1	1	2	3	1	1	6	1	2	1	1	1	3	1	1	1	2	3	4	3	1	2	1	4	3	1	3	1	2	2	26	13		2	
+178	10/31/2014 13:56	6	3	2	0	0	1	2	3	3	2	1	1	2	2	2	1	1	1	1	1	1	1	1	2	1	1	2	1	1	1	1	1	1	2	13	12		4	
+179	10/31/2014 14:28	5	2	2	0	0	1	2	3	4	1	4	3	3	2	3	2	1	2	1	3	3	1	4	4	1	1	1	4	4	2	3	1	2	2	27	19		7	
+180	10/31/2014 14:58	4	1	2	10	1	1	2	3	1	2	4	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	2	10	10		2	
+181	10/31/2014 15:26	3	3	1	0	0	1	2	3	4	2	4	3	2	1	3	1	1	1	1	1	2	1	1	2	1	1	1	1	3	1	3	1	1	2	19	10		7	
+182	11/3/2014 14:26	2	2	1	NA	NA	0	2	3	3	2	5	4	4	1	3	1	3	1	1	1	1	1	1	4	1	1	1	3	3	1	1	1	2	2	24	10		7	
+183	11/3/2014 15:04	1	1	1	20	1	1	2	3	3	2	3	3	2	1	2	1	2	1	1	1	3	3	1	4	1	3	1	4	5	2	3	1	2	2	31	11		6	
+184	11/3/2014 15:23	6	3	2	0	0	1	2	3	5	2	4	5	5	1	5	1	4	1	1	1	5	4	1	1	1	5	1	5	5	1	1	1	2	2	40	10		10	
+185	11/3/2014 15:57	5	2	2	0	0	1	2	3	4	2	5	3	4	1	4	1	3	2	1	1	4	1	2	3	1	1	1	4	4	1	4	1	2	1	32	12	"To see how i would react, if I would shoot the civilans and how it made me feel."	7	
+186	11/3/2014 16:24	4	1	2	5	1	1	2	3	3	2	4	3	3	4	2	2	1	1	2	2	3	3	3	4	1	1	4	5	4	2	2	1	2	2	28	22		6	
+187	11/4/2014 17:31	3	3	1	NA	NA	0	2	3	2	2	2	1	2	1	1	1	1	1	1	1	1	1	1	3	1	1	1	3	4	1	2	1	1	1	19	10	To see how playing video games affects our emotions.	3	
+188	11/11/2015 0:00	4	1	2	5	1	1	1	3	3	2	1	4	4	1	4	3	3	1	1	5	3	2	2	4	1	2	2	4	3	4	4	1	2	1	33	21	see emotional response to games	7	
+189	11/11/2015 0:00	1	1	1	4	1	1	1	3	4	1	2	2	4	2	4	1	1	1	1	1	1	1	1	2	1	1	1	2	3	2	1	1	1	2	18	12		6	
+190	11/11/2015 0:00	5	2	2	0	0	1	1	3	1	2	1	1	3	2	2	1	1	1	1	2	2	1	3	3	1	1	2	2	2	1	1	1	1	2	20	15		2	
+191	11/12/2015 0:00	2	2	1	0	0	1	1	3	3	2	1	2	2	1	2	2	3	1	1	1	1	1	2	2	1	1	1	2	3	1	2	1	1	2	19	12		5	
+192	11/12/2015 0:00	3	3	1	8	1	1	1	3	1	1	1	4	2	3	1	4	3	1	1	5	2	2	1	3	4	1	1	2	4	1	4	1	1	2	24	22		5	
+193	11/12/2015 0:00	6	3	2	20	1	1	1	3	4	1	3	3	3	3	3	2	4	1	1	3	3	2	2	4	2	2	2	3	3	1	2	1	1	2	29	18		7	
+194	11/16/2015 0:00	1	1	1	5	1	1	1	3	3	2	1	3	4	2	3	1	2	1	1	1	1	1	1	3	1	2	1	2	3	2	3	1	1	2	24	12		6	
+195	11/16/2015 0:00	4	1	2	0	0	1	1	3	3	2	3	1	1	3	2	4	3	1	1	2	1	3	2	2	1	1	1	5	5	4	3	1	1	2	26	20		4	
+197	11/17/2015 0:00	5	2	2	0	0	1	1	3	4	1	4	2	3	2	2	1	1	3	1	3	2	1	1	4	1	1	1	3	2	2	1	1	1	1	20	16	to find out how I feel when playing a video game	6	
+198	11/17/2015 0:00	2	2	1	4	1	1	1	3	4	2	3	4	4	1	3	1	3	1	1	4	2	1	1	2	1	1	1	2	2	3	1	1	2	2	21	15		8	
+199	11/18/2015 0:00	6	3	2	10	1	1	1	3	5	2	4	5	5	1	4	1	4	1	1	3	3	2	1	2	1	4	1	4	5	1	1	1	2	2	34	12		10	
+200	11/18/2015 0:00	3	3	1	0	0	1	1	3	4	1	3	3	3	1	3	1	1	1	1	1	2	1	1	2	1	1	1	2	4	2	3	1	2	2	22	11		7	
+201	11/18/2015 0:00	1	1	1	0	0	1	1	3	2	1	4	1	2	1	3	1	1	2	1	4	1	2	1	3	1	1	1	1	4	1	1	1	1	2	19	14		3	
+202	11/18/2015 0:00	4	1	2	5	1	1	1	3	3	1	3	2	2	3	1	2	3	2	2	1	2	3	1	3	1	2	1	2	3	1	4	1	1	2	25	15		5	
+203	11/19/2015 0:00	5	2	2	0	0	1	1	3	4	2	5	2	5	2	3	1	2	2	1	3	1	1	1	4	2	1	1	3	3	3	4	1	2	1	27	17	effects of violent games on players	6	
+204	2/8/2016 0:00	2	2	1	0	0	1	1	1	3	1	4	3	3	2	4	4	2	3	2	3	3	2	1	3	4	1	3	2	5	4	3	2	1	2	28	28		6	
+205	2/8/2016 0:00	3	3	1	5	1	1	1	1	4	1	5	5	4	2	3	1	4	4	2	3	3	3	3	3	1	1	1	2	2	4	2	1	1	2	27	22		9	
+206	2/8/2016 0:00	6	3	2	5	1	1	1	1	1	2	4	4	3	2	1	1	3	1	1	1	3	4	3	3	1	1	1	4	3	1	3	1	1	1	28	13	how much do I like being violent	5	
+207	2/8/2016 0:00	1	1	1	0	0	1	1	1	4	1	5	3	1	1	4	1	1	2	1	1	2	1	2	3	1	1	1	4	3	1	1	1	1	2	21	12		7	
+107	9/30/2014	4	1	2	0	0	1	1	3	4	2	6	4	4	1	3	2	1	1	1	1	1	2	1	1	1	1	2	3	1	2	3	1	1	2	20	13	I beleive that the purpose of the study is to see if people will get mad even though they are set up to lose in a video game.		1
+108	10/1/2014	3	3	1	 		0	1	3	4	1	6	3	4	1	3	1	1	1	1	1	3	3	1	3	1	2	1	2	4	2	3	1	1	2	28	11	To see how playing Video Games had a link to certain emotions.		1
+109	10/1/2014	2	2	1	0	0	1	1	3	5	1	4	4	5	2	4	1	3	2	1	1	4	3	1	5	1	2	1	4	4	3	3	1	2	2	37	14	I thought the purpose of this study was to see how people react or enjoy a violent game.		1
+110	10/1/2014	1	1	1	0	0	1	1	3	3	2	2	4	3	1	3	1	2	1	1	1	2	1	1	4	4	1	1	3	5	3	4	1	1	1	28	15	The purpose of this study was to test the effect of playing video games. I also think the study was experimented to see if the amount of video games effected you in a positive or negative way based on your behaviors you felt.		1
+111	10/1/2014	6	3	2	0	0	1	1	3	3	1	5	2	2	2	3	4	4	1	1	2	2	1	3	3	1	1	1	4	3	2	2	1	2	1	25	18	To understand how video games affect me mentally and emotionally.		1
+112	10/1/2014	1	1	1	0	0	1	1	3	3	2	5	4	3	2	2	1	1	1	1	1	2	2	1	4	1	1	1	1	2	1	2	1	1	1	20	11	"I'm not sure, but my guess is to see how people react emotionally to video games, and to see how invested they become into games."		1
+113	10/2/2014	4	1	2	10	1	1	1	3	3	2	5	4	4	3	3	1	2	2	1	1	3	2	1	4	1	1	1	4	4	1	4	1	1	1	31	13	N/A		1
+114	10/2/2014	 	 	 	 		0	1	3	3	2	1	1	2	3	4	1	2	2	3	1	3	3	1	4	1	1	5	3	3	4	3	2	2	2	28	23	I thought the purpose of the study was to observe the emotions that came with playing the game.		1
+115	10/2/2014	3	3	1	20	1	1	1	3	5	1	1	1	2	3	5	1	4	2	1	2	3	3	1	5	1	2	3	5	5	5	5	2	2	2	39	21	I thought the purpose of this experiement was to look at a person's behavior and how they react to the game.		1
+116	10/7/2014	2	2	1	15	1	1	1	3	3	1	2	2	2	2	2	2	3	2	1	1	2	1	1	2	1	1	1	3	3	2	2	1	2	2	21	14	To see how I reacted to the game and the way that was very violant and quickly paeed.		1
+117	10/7/2014	1	1	1	0	0	1	1	3	2	2	4	2	2	3	2	4	3	1	1	2	2	3	4	5	3	2	1	4	4	3	4	2	1	2	31	24	The purpose of this study was for me to a play a video game and then answer some questions on how it made me feel.		1
+118	10/8/2014	4	1	2	0	0	1	1	3	5	2	2	5	4	1	2	1	1	2	1	3	3	2	1	4	1	1	1	3	5	1	3	1	1	2	28	13	"Possibly to find out if violence in video games, specifically senseless violence can affect my mood or how i think."		1
+119	10/8/2014	5	2	2	0	0	1	1	3	4	1	2	3	4	3	4	3	4	1	2	2	3	2	2	4	2	2	1	2	4	2	4	1	1	1	33	19	i didnt have an idea what this task all about.		1
+120	10/8/2014	6	3	2	0	0	1	1	3	1	1	1	1	1	1	1	1	1	1	1	1	1	1	3	1	1	1	1	1	1	1	1	1	2	1	10	12	to test emotions related to playing video games		1
+121	10/8/2014	3	3	1	0	0	1	1	3	4	2	4	4	4	1	3	1	1	1	1	1	3	1	1	2	1	1	1	2	3	2	2	1	1	1	22	11	Probably to see how video games impact your emotions.		1
+122	10/8/2014	2	2	1	 		0	1	3	3	2	2	1	2	2	1	1	3	1	1	1	1	1	1	4	1	1	1	4	4	1	4	1	2	2	25	11	The purpose of the study was to show how the game made us feel. Do video games make people more aggressive?		1
+123	10/9/2014	3	3	1	 		0	1	3	1	1	1	1	1	1	1	2	1	3	2	1	1	1	1	2	1	1	2	1	2	2	1	2	2	2	12	17	To see how I would react to playing a violent video game.		1
+124	10/9/2014	4	1	2	 		0	1	3	2	2	2	3	1	3	2	2	3	1	2	2	3	1	2	2	1	1	3	4	3	2	3	2	2	1	23	20	To see how video games affect our mind and behavior.		1
+125	10/9/2014	1	1	1	 		0	1	3	4	2	1	4	4	2	5	1	2	1	1	1	4	3	1	5	1	3	1	4	5	3	5	1	2	2	40	13	My emotional responses to a video game		1
+126	10/9/2014	2	2	1	 		0	1	3	5	2	5	5	4	3	4	1	3	4	1	1	4	1	1	5	3	1	1	4	5	4	2	1	1	2	33	20	I thought the purpose of this study was a few different things. 1: I instantly noticed the level that was given to us to play. It dealt with killing innocent people that were unarmed and running away. So i feel as if the study could have been about if a person would feel guilty or not about killing innocent people. 2:I think how playing a violent game can affect on the emotions and/or actions of a p		1
+127	10/15/2014	6	3	2	0	0	1	1	3	4	1	4	2	4	1	4	1	3	1	1	1	4	4	1	4	1	3	1	3	4	1	3	1	2	2	36	10	The purpsoe of the study was to study emotions displayed during playing video games and their effects on behavior.		1
+128	10/15/2014	1	1	1	0	0	1	1	3	3	2	3	2	1	1	3	2	3	1	3	2	4	3	2	1	4	2	5	2	1	2	1	3	1	2	21	25	The purpose of this study was to see how emotions and video games are related. To see if emotions are shown while playing video games.		1
+129	10/15/2014	2	2	1	0	0	1	1	3	3	1	2	1	2	4	3	4	2	2	1	1	3	1	2	3	2	1	3	3	4	5	4	3	2	2	26	27	the purpose was to measure emotions after playing video games to see what correlations exist		1
+130	10/15/2014	5	2	2	 		0	1	3	4	2	3	4	4	2	4	1	3	2	1	2	3	1	2	4	2	2	1	2	2	1	4	1	1	1	29	15	Didn't know what experiment was about		1
+131	10/15/2014	4	1	2	0	0	1	1	3	4	2	3	3	4	2	4	1	3	1	1	1	3	4	2	5	1	3	1	5	5	1	4	1	1	2	40	12	What emotions does a player goes through while playing a video game.		1
+132	10/15/2014	3	3	1	0	0	1	1	3	2	1	2	1	2	2	2	4	1	2	2	1	2	1	2	3	2	1	3	3	3	3	3	2	2	2	21	23	to see the reaction/emotion or responses after playing or during playing the game		1
+133	10/15/2014	3	3	1	0	0	1	1	3	4	2	6	1	4	2	4	1	2	1	1	2	3	4	1	4	1	3	2	3	4	2	3	1	2	2	34	14	To measure how video games effect peoples' emotions or judgements.		1
+134	10/16/2014	5	2	2	 		0	1	3	4	2	3	4	4	3	4	1	3	3	1	2	3	1	3	4	2	1	2	5	5	3	2	1	1	1	32	21	To determine how playing video games effected our emotions		1
+135	10/16/2014	6	3	2	0	0	1	1	3	2	1	2	2	2	2	1	1	1	1	1	2	1	1	1	2	1	1	1	1	3	2	2	1	2	2	15	13	"To see how people react when playing video games. Or, if they know how to play the certain video game that they were required to play."		1
+136	10/16/2014	4	1	2	 		0	1	3	2	2	2	2	2	1	1	2	1	1	1	1	2	1	1	2	1	1	3	3	3	1	3	1	1	2	19	13	I was told the process was for others to view the emotions I was portraying while playing the game or to explain my emotions while playing.		1
+137	 	1	1	1	0	0	1	1	3	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 		
