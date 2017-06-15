@@ -5,9 +5,19 @@ library(car)
 library(plyr)
 library(BayesFactor)
 library(tidyverse)
+library(forcats)
+
+# OR.to.d for comparison with literature
+# Hasselblad & Hedges (1995) technique
+OR.to.d = function(OR=NULL, b=NULL) {
+  if (!is.null(OR)) b1 = log(OR)
+  if (!is.null(b) & !is.null(OR)) if (b1 != b) print("Nonmatching OR and b! One or the other, please.")
+  if (is.null(b)) b = b1
+  return(b * sqrt(3)/pi)
+}
 
 # read in data
-dat <- read.delim("HeroViolence_Gibson.txt", stringsAsFactors = F)
+dat <- read.delim("HeroViolence_Master.txt", stringsAsFactors = F)
 
 dim(dat)
 sapply(dat, FUN=class)
@@ -30,6 +40,9 @@ dat$GameNum = ifelse(dat$Game == "Antisocial", -1,
 dat$Request = factor(dat$Request, levels=c(1,2), labels=c("Help Red Cross", "Save Lives"))
 # Remove all not intercepted by confederate
 dat = filter(dat, Intercepted == 1)
+# Remove all data flagged as bad by CMU collaborators
+dat <- filter(dat, badgroup != 1)
+
 # Make binary response variable
 dat$DV = dat$Calls; dat$DV[dat$DV >= 1] = 1
 
@@ -89,7 +102,6 @@ badmodel2 <- lm(Calls ~ Game * Request,
 
 # results of badmodel 1: number of calls
 Anova(badmodel1, type = 2) # an effect of game?
-Anova(badmodel1, type = 3) # depends on Type II vs III sum of squares
 summary(badmodel1)
 
 # results of badmodel 2: number of calls among those volunteering at all
@@ -106,27 +118,22 @@ chisq.test(dat$DV, y=dat$Request)
 chisq.test(dat$DV, y=interaction(dat$Game, dat$Request))
 
 # Logistic multiple regression ----
-# model = glm(DV ~ Game*Request, family="binomial", data=dat)
-# summary(model)
-# ORs = data.frame("OR"=exp(summary(model)$coefficients[,1]),
-#                  "LL"=exp(summary(model)$coefficients[,1]-1.98*summary(model)$coefficients[,2]),
-#                  "UL"=exp(summary(model)$coefficients[,1]+1.98*summary(model)$coefficients[,2])
-# )
-# d = OR.to.d(b=summary(model)$coefficients[,1])
-# # Doesn't look like it. Let's have the means.
-# means = tapply(dat$DV, INDEX=list(dat$Game, dat$Request), FUN=mean, na.rm=T)
-# barplot(means, beside=T, legend.text=c("Antisocial", "Control", "Prosocial")
-#         , ylab="Volunteering (proportion)"
-#         , args.legend=list(x=3.2, y=.55))
-# # Ordinal factor of game?
-# modelOrdinal = glm(DV ~ GameOrdered*Request, family="binomial", data=dat)
-# summary(modelOrdinal)
-# ORs = data.frame("OR"=exp(summary(modelOrdinal)$coefficients[,1]),
-#                  "LL"=exp(summary(modelOrdinal)$coefficients[,1]-1.98*summary(modelOrdinal)$coefficients[,2]),
-#                  "UL"=exp(summary(modelOrdinal)$coefficients[,1]+1.98*summary(modelOrdinal)$coefficients[,2])
-# )
-# d = OR.to.d(b=summary(modelOrdinal)$coefficients[,1])
-# 
+logisticmodel = glm(DV ~ Game*Request, family="binomial", data=dat)
+Anova(logisticmodel, type = 3)
+summary(logisticmodel)
+ORs = data.frame("OR"=exp(summary(logisticmodel)$coefficients[,1]),
+                 "LL"=exp(summary(logisticmodel)$coefficients[,1]-1.98*summary(logisticmodel)$coefficients[,2]),
+                 "UL"=exp(summary(logisticmodel)$coefficients[,1]+1.98*summary(logisticmodel)$coefficients[,2])
+)
+d = mutate_all(ORs, funs(OR.to.d)) %>% 
+  mutate(SE = (UL-OR)/1.98)
+
+# Doesn't look like it. Let's have the means.
+means = tapply(dat$DV, INDEX=list(dat$Game, dat$Request), FUN=mean, na.rm=T)
+barplot(means, beside=T, legend.text=c("Antisocial", "Control", "Prosocial")
+        , ylab="Volunteering (proportion)"
+        , args.legend=list(x=3.2, y=.55))
+
 # Extreme groups contrast, prosocial vs. antisocial ----
 # modelContrast = dat %>% 
 #   filter(Game %in% c("Prosocial", "Antisocial")) %>% 
@@ -191,6 +198,11 @@ bf4 # 2.3 : 1 for?
 # Non-parametric Kruskal-Wallis test ----
 # NOTE: this can only handle one-way ANOVA; does not generalize to two-way.
 kruskal.test(formula = Calls ~ Game, data = dat)
+kruskal.test(formula = Calls ~ Request, data = dat)
+# by subgroups?
+kruskal.test(formula = Calls ~ Game, data = dat, subset = Request == "Help Red Cross")
+kruskal.test(formula = Calls ~ Game, data = dat, subset = Request == "Save Lives")
+
 # pros vs ctrl, p = .262
 kruskal.test(formula = Calls ~ Game, data = dat, 
              subset = Game %in% c("Prosocial", "Control"))
@@ -200,3 +212,46 @@ kruskal.test(formula = Calls ~ Game, data = dat,
 # ctrl vs anti, p = .224
 kruskal.test(formula = Calls ~ Game, data = dat, 
              subset = Game %in% c("Control", "Antisocial"))
+
+
+# Plots
+# ZINB model of counts
+lsmeans(zinbmod, c("Game", "Request")) %>% 
+  summary() %>% 
+  mutate(Game = fct_relevel(Game, c("Antisocial", "Control", "Prosocial"))) %>% 
+  ggplot(aes(x = Game, y = lsmean)) +
+  geom_point() +
+  geom_jitter(aes(y = Calls), data = dat, 
+              alpha = .2, width = .25, height = .5) +
+  geom_errorbar(aes(ymin = asymp.LCL, ymax = asymp.UCL)) +
+  facet_wrap(~Request) +
+  scale_y_continuous("Predicted mean calls")
+
+# probability model of volunteering at all
+lsmeans(logisticmodel, c("Game", "Request")) %>% 
+  summary() %>% 
+  mutate(Game = fct_relevel(Game, c("Antisocial", "Control", "Prosocial"))) %>% 
+  ggplot(aes(x = Game, y = lsmean)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = asymp.LCL, ymax = asymp.UCL)) +
+  facet_wrap(~Request) +
+  scale_y_continuous("Probability of volunteering at all (log-odds)")
+
+lsmeans(logisticmodel, c("Game", "Request")) %>% 
+  summary() %>% 
+  mutate(Game = fct_relevel(Game, c("Antisocial", "Control", "Prosocial"))) %>% 
+  mutate_at(.cols = vars(lsmean, asymp.LCL, asymp.UCL), .funs = funs(exp(.)/(1+exp(.)))) %>% 
+  ggplot(aes(x = Game, y = lsmean)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = asymp.LCL, ymax = asymp.UCL)) +
+  facet_wrap(~Request) +
+  scale_y_continuous("Probability of volunteering at all (%)", limits = c(0, 1))
+
+# what if we bin it to 0, 1-5, 5-10, 10+?
+dat.mutant <- mutate(dat, Calls = ifelse(Calls == 0, 0, 
+                                         ifelse(Calls > 0 & Calls <= 5, 1,
+                                                ifelse(Calls <= 10, 2, 3))))
+qplot(dat.mutant$Calls, geom = "histogram", binwidth = 1)
+mutantmod <- lm(Calls ~ Game * Request, data = dat.mutant)
+Anova(mutantmod, type = 3)
+summary(mutantmod) # nah, and this is goofy anyway
