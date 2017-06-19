@@ -67,6 +67,7 @@ write.table(conting, "for_jasp_conting.csv", row.names = F)
 # TODO: Consider recoding so that Request is coded contr.sum
 zipmod = zeroinfl(Calls ~ Game * Request, data = dat)
 zinbmod = zeroinfl(Calls ~ Game * Request, data = dat, dist = "negbin")
+zinbmod.cov <- zeroinfl(Calls ~ Game * Request + Gender, data = dat, dist = "negbin")
 
 # Zero-inflated Poisson results
 Anova(zipmod, type = 3)
@@ -81,6 +82,10 @@ summary(zinbmod)
 # Very, very strong overdispersion parameter
 # No longer any sig effects on count parameter
 # No effects on zero-inflation parameter
+
+# ZINB w/ covariate results
+Anova(zinbmod.cov, type = 3)
+summary(zinbmod.cov)
 
 # Ordered models?
 zipmod.ordered <- zeroinfl(Calls ~ GameNum * Request, data = dat)
@@ -99,9 +104,10 @@ badmodel1 <- lm(Calls ~ Game * Request,
 badmodel2 <- lm(Calls ~ Game * Request, 
                 contrasts = list(Request = contr.sum),
                 data = dat[dat$Calls > 0,]) # same as above + ignores base-rate
+aov(Calls ~ Game, data = dat) %>% TukeyHSD
 
 # results of badmodel 1: number of calls
-Anova(badmodel1, type = 2) # an effect of game?
+Anova(badmodel1, type = 3) # an effect of game?
 summary(badmodel1)
 
 # results of badmodel 2: number of calls among those volunteering at all
@@ -110,6 +116,28 @@ Anova(badmodel2, type = 3)
 summary(badmodel2)
 tapply(dat$Calls, dat$Game, FUN = mean)
 
+# Is the ANOVA result robust to exclusion of any one y = 20 response?
+y20 <- dat$Subject[dat$Calls == 20]
+
+for (i in 1:length(y20)) {
+  print(paste("Results excluding subject", y20[i]))
+  lm(Calls ~ Game, data = dat, subset = Subject != y20[i]) %>% 
+    Anova(type = 3) %>% 
+    print()
+}
+
+# Prosocial vs antisocial contrast
+lm(Calls ~ Game, data = dat, subset = Game %in% c("Antisocial", "Prosocial")) %>% 
+  Anova(type = 3) # p = .015
+# Remove one y = 20 outlier and test robustness
+lm(Calls ~ Game, data = dat, subset = Game %in% c("Antisocial", "Prosocial") & Subject != 9) %>% 
+  Anova(type = 3) # p = .026
+# Remove two y = 20 outliers and test robustness
+lm(Calls ~ Game, data = dat, subset = Game %in% c("Antisocial", "Prosocial") & !(Subject %in% c(9, 76))) %>% 
+  Anova(type = 3) # p = .046
+# Remove three y = 20 outliers and test robustness
+lm(Calls ~ Game, data = dat, subset = Game %in% c("Antisocial", "Prosocial") & !(Subject %in% c(9, 76, 133))) %>% 
+  Anova(type = 3) # p = .082
 
 # Lesser tests ensue ----
 # Chi-square tests ----
