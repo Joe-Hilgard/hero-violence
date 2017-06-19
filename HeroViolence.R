@@ -116,6 +116,13 @@ tapply(dat$Calls, dat$Game, FUN = mean)
 chisq.test(dat$DV, y=dat$Game)
 chisq.test(dat$DV, y=dat$Request)
 chisq.test(dat$DV, y=interaction(dat$Game, dat$Request))
+# contrasts
+filter(dat, Game %in% c("Antisocial", "Prosocial")) %>% 
+  with(., chisq.test(DV, Game))
+filter(dat, Game %in% c("Antisocial", "Control")) %>% 
+  with(., chisq.test(DV, Game))
+filter(dat, Game %in% c("Control", "Prosocial")) %>% 
+  with(., chisq.test(DV, Game))
 
 # Logistic multiple regression ----
 logisticmodel = glm(DV ~ Game*Request, family="binomial", data=dat)
