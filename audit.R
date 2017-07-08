@@ -6,7 +6,7 @@ library(lubridate)
 
 dat.old = read.delim("HeroViolence.txt")
 dat.old2 = read.csv("HeroViolenceData - final complete data file.csv", stringsAsFactors = F)
-dat.new = read_spss("HeroViolenceData - FS 14 dataAdam.sav")
+dat.new = read_spss("./partial_datafiles/HeroViolenceData - FS 14 dataAdam.sav")
 
 
 setdiff(names(dat.old), names(dat.new))

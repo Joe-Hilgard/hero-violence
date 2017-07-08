@@ -1,0 +1,105 @@
+---
+title: "Hero Violence"
+author: "Joe Hilgard"
+date: "June 7, 2017"
+output: html_document
+---
+
+## Data accounting
+An initial data collection included 216 subjects, 191 of which were successfully intercepted. After inspection of the results, which were not statistically significant, we decided to collect an additional sample. Additionally, we decided to exclude a semester's worth of participants from one study site (n = 30) for whom the quality of data was suspect. This left us with a final sample of 204 subjects, 189 of which were successfully intercepted.
+
+[I think what I would like to do is to show the analyses 2 (initial data vs 2ndary collection) x 2 (exclusions, no exclusions) x 4 (model)]
+
+## Distribution
+
+Initial inspection of the data revealed pronounced non-normality. Many subjects did not offer to make any calls, and among those that do, the number of calls offered is strongly right-skewed and favors multiples of 5. 
+This non-normality creates ambiguity in what might be the most appropriate model to fit. Although ANOVA is commonly used and fairly robust to outliers, its assumptions would seem to be violated by the pronounced non-normality of the residuals. 
+
+To that end, we fit alternative models to explore the robustness of the result and to characterize the analytic ambiguity of the results. In total, we fit:
+1) ANOVA
+2) logistic regression, testing whether condition affected the odds of volunteering to make any calls
+3) a zero-inflated negative binomial, which accounts for the frequent zero-responses and the strong right skew, and
+4) a non-parametric Kruskal-Wallis test for differences in the median.
+
+Results for each model are reported separately, then synthesized and summarized at the end.
+
+```{r, echo = F, warning=F, message=F}
+source("HeroViolence.R")
+# library(haven)
+# library(tidyverse)
+# dat.new <- read_sav("HeroViolenceData - FS 14 dataAdam.sav")
+ggplot(dat, aes(x = Calls, fill = factor(Game))) +
+  geom_histogram(position = "dodge", binwidth = 1)
+```
+
+```{r, echo = F, warning=F}
+lm(Calls ~ Game * Request, data = dat) %>% 
+  augment() %>% 
+  ggplot(aes(x = .resid)) + geom_histogram()
+
+summary(badmodel1)
+Anova(badmodel1, type = 3)
+
+lm(Calls ~ Game, data = dat, subset = Game %in% c("Antisocial", "Prosocial")) %>% summary()
+```
+
+### ANOVA
+
+ANOVA indicated a significant effect of game, F(2, 183) = 3.20, p = .043. Neither the effect of request nor the Game × Request interaction was statistically significant, F(1, 183) = 1.27, p = .262 and F(2, 183) = 0.00, p = .996, respectively.  
+
+Collapsing across levels of request, a contrast between the prosocial-violence and antisocial-violence conditions was statistically significant, *t*(124) = 2.48, *p* = .015. Neither game significantly differed from control. 
+
+### Logistic GLM
+To test whether the game influenced the odds of volunteering, we collapsed observations to a binomial outcome (0 = did not volunteer, 1 = volunteered). A logistic GLM was fit to test for effects.
+
+```{r, , echo = F, warning=F}
+binom <- glm(DV ~ Game * Request, contrasts = list(Request = contr.sum), data = dat)
+Anova(binom, type = 3)
+summary(binom)
+```
+The effect of game was not statistically significant, but not especially far from significance either, *chiq(2)* = 5.03, p = .081. Effects of request and the Game x Request interaction were not statistically significant, *chisq(1)* = .351 and *chisq(2)* = .924, respectively.
+
+```{r, , echo = F, warning=F}
+binom.contrast <- glm(DV ~ Game * Request, contrasts = list(Request = contr.sum), data = dat, subset = Game %in% c("Prosocial", "Antisocial"))
+summary(binom.contrast)
+```
+
+Again, the contrast between the prosocial-violent and antisocial-violent games was statistically significant, t(122) = 2.23, p = .028. However, neither game significantly differed from control.
+
+## Zero-inflated negative binomial
+
+A zero-inflated negative binomial was then fit to the data. This model has two parts: The zero-inflation model, which estimates whether participants volunteer at all, and the count model, which estimates how many calls they offer when they do volunteer.
+
+```{r, echo = F, warning=F}
+summary(zinbmod)
+
+zeroinfl(Calls ~ Game, data = dat, subset = Game %in% c("Prosocial", "Antisocial"), dist = "negbin") %>% summary()
+```
+
+Application of the zero-inflated negative binomial found no significant effects of the games or request on either the count or zero-inflation model. The overdispersion parameter was highly significant, supporting the use of the negative binomial over a zero-inflated Poisson distribution.
+
+A pairwise contrast between the prosocial-violent and antisocial-violent games found a significant difference on the zero-inflation parameter (*z* = -2.15, p = .032) but not on the count parameter (*z* = 1.29, *p* = .197). Again, neither game differed from control.
+
+```{r, echo = F, warning=F}
+Anova(zinbmod.ordered)
+```
+
+Again, it's possible to look at just the pairwise antisocial-vs-prosocial contrast, but this doesn't reveal an effect either.
+
+```{r, , echo = F, warning=F}
+zinbmod.contrast <- zeroinfl(Calls ~ Game * Request, data = dat, dist = "negbin",
+                             subset = Game %in% c("Antisocial", "Prosocial"))
+summary(zinbmod.contrast)
+```
+
+
+## Kruskal-Wallis test
+The Kruskal-Wallis test of different group means is only marginally significant, chi-sq(2) = 5.09, p = .079. If we compare just the Gratuitous Violence and Hero-Violence groups, then we get a significant result, chi-sq(1) = 4.97, p = .026, but neither of the other pairwise tests are significant (p = .224, .262).
+
+# Summary
+The results generally seem to be a little ambiguous. We can just reach statistical significance if we ignore the problems with the distribution. I don't recommend this, because it could be embarrassing in peer review, pre- or post-publication. Use of the zero-inflated negative binomial indicates an absence of significant effects. However, use of logistic regression suggests slight evidence that the prosocial game lead to greater likelihood of making any calls relative to the antisocial game, and the non-parametric KW test indicates a possible difference in means between the two conditions. 
+
+Still, the absence of a significant omnibus test, combined with the p-values all being .05 > p > .025 and the decision to continue analysis after a peek at the data means that we may face criticism if we try to make a firm argment for the alternative hypothesis. Perhaps it would be possible to report the experiment as having ambiguous results and publish it in an open-access journal. I am fond of Royal Society Open Science, which does not charge any publication fee. I am, of course, open to publication in a more mainstream journal if the lead authors want to pursue it.
+
+Please let me know if you have a preference for which analyses to highlight in the manuscript. 
+It might be interesting to showcase the ambiguity of interpretation as a function of the marginal p-values and choice of model.
