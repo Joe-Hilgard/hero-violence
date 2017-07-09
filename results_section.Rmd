@@ -5,7 +5,7 @@ date: "June 7, 2017"
 output: html_document
 ---
 
-## Data accounting
+## Sample
 An initial data collection included 216 subjects, 191 of which were successfully intercepted. After inspection of the results, which were not statistically significant, we decided to collect an additional sample. Additionally, we decided to exclude a semester's worth of participants from one study site (n = 30) for whom the quality of data was suspect. This left us with a final sample of 204 subjects, 189 of which were successfully intercepted.
 
 [I think what I would like to do is to show the analyses 2 (initial data vs 2ndary collection) x 2 (exclusions, no exclusions) x 4 (model)]
