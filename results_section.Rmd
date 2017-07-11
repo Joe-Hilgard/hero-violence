@@ -2,104 +2,167 @@
 title: "Hero Violence"
 author: "Joe Hilgard"
 date: "June 7, 2017"
-output: html_document
+output: 
+  word_document:
+    reference_docx: template_0.docx
 ---
 
-## Sample
-An initial data collection included 216 subjects, 191 of which were successfully intercepted. After inspection of the results, which were not statistically significant, we decided to collect an additional sample. Additionally, we decided to exclude a semester's worth of participants from one study site (n = 30) for whom the quality of data was suspect. This left us with a final sample of 204 subjects, 189 of which were successfully intercepted.
+```{r, echo = F, warning=F, message=F}
+library(car)
+library(pscl)
+library(hilgard)
+library(tidyverse)
+library(broom)
+library(cowplot)
+load("./R-objects/analysis.RData")
+```
 
-[I think what I would like to do is to show the analyses 2 (initial data vs 2ndary collection) x 2 (exclusions, no exclusions) x 4 (model)]
+## Sample
+An initial data collection included 216 subjects, 191 of which were successfully intercepted. After inspection of the results, which were not statistically significant, we decided to collect an additional sample. Additionally, we decided to exclude a semester's worth of participants from one study site (n = 31) for whom the quality of data was suspect. This left us with a final sample of 204 subjects, 189 of which were successfully intercepted. 
+
+Our primary analyses concern this final sample. However, to explore the robustness of our results, we also analyze the data according to the 2 (data collection: initial, final) x 2 (exclusions: excluding, not excluding) set of data.
 
 ## Distribution
 
-Initial inspection of the data revealed pronounced non-normality. Many subjects did not offer to make any calls, and among those that do, the number of calls offered is strongly right-skewed and favors multiples of 5. 
+Initial inspection of the data revealed pronounced non-normality (Figure 1). Many subjects did not offer to make any calls, and among those that do, the number of calls offered is strongly right-skewed and favors multiples of 5. 
+
+```{r, echo = F, warning=F, message=F}
+dat.4 %>% 
+  mutate(Request = factor(Request, 
+                          levels=c(1,2), 
+                          labels=c("Help Red Cross", "Save Lives"))) %>% 
+  ggplot(aes(x = Calls)) +
+  geom_histogram() +
+  facet_grid(Game ~ Request)
+```
+
 This non-normality creates ambiguity in what might be the most appropriate model to fit. Although ANOVA is commonly used and fairly robust to outliers, its assumptions would seem to be violated by the pronounced non-normality of the residuals. 
 
 To that end, we fit alternative models to explore the robustness of the result and to characterize the analytic ambiguity of the results. In total, we fit:
 1) ANOVA
 2) logistic regression, testing whether condition affected the odds of volunteering to make any calls
-3) a zero-inflated negative binomial, which accounts for the frequent zero-responses and the strong right skew, and
-4) a non-parametric Kruskal-Wallis test for differences in the median.
+3) a chi-squared test, again testing whether condition affected the odds of volunteering to make any calls
+4) a zero-inflated negative binomial, which accounts for the frequent zero-responses and the strong right skew, and
+5) a non-parametric Kruskal-Wallis test for differences in the median.
 
 Results for each model are reported separately, then synthesized and summarized at the end.
 
-```{r, echo = F, warning=F, message=F}
-source("HeroViolence.R")
-# library(haven)
-# library(tidyverse)
-# dat.new <- read_sav("HeroViolenceData - FS 14 dataAdam.sav")
-ggplot(dat, aes(x = Calls, fill = factor(Game))) +
-  geom_histogram(position = "dodge", binwidth = 1)
-```
-
-```{r, echo = F, warning=F}
-lm(Calls ~ Game * Request, data = dat) %>% 
-  augment() %>% 
-  ggplot(aes(x = .resid)) + geom_histogram()
-
-summary(badmodel1)
-Anova(badmodel1, type = 3)
-
-lm(Calls ~ Game, data = dat, subset = Game %in% c("Antisocial", "Prosocial")) %>% summary()
-```
-
 ### ANOVA
 
-ANOVA indicated a significant effect of game, F(2, 183) = 3.20, p = .043. Neither the effect of request nor the Game × Request interaction was statistically significant, F(1, 183) = 1.27, p = .262 and F(2, 183) = 0.00, p = .996, respectively.  
+ANOVA indicated a significant effect of game, `r report_f(aovmod[[4]], "Game")`. Neither the effect of request nor the Game × Request interaction was statistically significant, `r report_f(aovmod[[4]], "Request")` and `r report_f(aovmod[[4]], "Game:Request")`, respectively.  
 
-Collapsing across levels of request, a contrast between the prosocial-violence and antisocial-violence conditions was statistically significant, *t*(124) = 2.48, *p* = .015. Neither game significantly differed from control. 
+Collapsing across levels of request, a contrast between the prosocial-violence and antisocial-violence conditions was statistically significant, `r report_t(aovmod.c[[4]], "GameProsocial")`. Neither game significantly differed from control. 
 
 ### Logistic GLM
 To test whether the game influenced the odds of volunteering, we collapsed observations to a binomial outcome (0 = did not volunteer, 1 = volunteered). A logistic GLM was fit to test for effects.
 
-```{r, , echo = F, warning=F}
-binom <- glm(DV ~ Game * Request, contrasts = list(Request = contr.sum), data = dat)
-Anova(binom, type = 3)
-summary(binom)
+```{r, message = F, echo = F, warning=F, include = F}
+Anova(logist[[4]], type = 3)
+summary(logist[[4]])
 ```
-The effect of game was not statistically significant, but not especially far from significance either, *chiq(2)* = 5.03, p = .081. Effects of request and the Game x Request interaction were not statistically significant, *chisq(1)* = .351 and *chisq(2)* = .924, respectively.
+The effect of game was not statistically significant, but not especially far from significance either, *chiq(2)* = 5.08, p = .079. Effects of request and the Game x Request interaction were not statistically significant, *chisq(1)* = .351, *p* = .358 and *chisq(2)* = .924, *p* = .948, respectively.
 
-```{r, , echo = F, warning=F}
-binom.contrast <- glm(DV ~ Game * Request, contrasts = list(Request = contr.sum), data = dat, subset = Game %in% c("Prosocial", "Antisocial"))
-summary(binom.contrast)
+```{r, echo = F, warning=F, message = F, include = F}
+summary(logist.c[[4]])
 ```
 
-Again, the contrast between the prosocial-violent and antisocial-violent games was statistically significant, t(122) = 2.23, p = .028. However, neither game significantly differed from control.
+Again, the contrast between the prosocial-violent and antisocial-violent games was statistically significant, `r report_z(logist.c[[4]], "GameProsocial")`. However, neither game significantly differed from control.
 
 ## Zero-inflated negative binomial
 
 A zero-inflated negative binomial was then fit to the data. This model has two parts: The zero-inflation model, which estimates whether participants volunteer at all, and the count model, which estimates how many calls they offer when they do volunteer.
 
-```{r, echo = F, warning=F}
-summary(zinbmod)
-
-zeroinfl(Calls ~ Game, data = dat, subset = Game %in% c("Prosocial", "Antisocial"), dist = "negbin") %>% summary()
+```{r, echo = F, warning=F, message=F, include=F}
+Anova(zinbmod[[4]], type = 3)
+summary(zinbmod[[4]])
 ```
 
-Application of the zero-inflated negative binomial found no significant effects of the games or request on either the count or zero-inflation model. The overdispersion parameter was highly significant, supporting the use of the negative binomial over a zero-inflated Poisson distribution.
+Application of the zero-inflated negative binomial did not find an omnibus effect of game (*chisq*(2) = 5.09, *p* = .079), request (*chisq*(1) = 0.85, *p* = .358), or Game × Request interaction (*chisq*(2) = 0.11, *p* = .948). The overdispersion parameter was highly significant (*z* = 4.66, *p* < .001), supporting the use of the negative binomial over a zero-inflated Poisson distribution.
 
-A pairwise contrast between the prosocial-violent and antisocial-violent games found a significant difference on the zero-inflation parameter (*z* = -2.15, p = .032) but not on the count parameter (*z* = 1.29, *p* = .197). Again, neither game differed from control.
-
-```{r, echo = F, warning=F}
-Anova(zinbmod.ordered)
-```
-
-Again, it's possible to look at just the pairwise antisocial-vs-prosocial contrast, but this doesn't reveal an effect either.
-
-```{r, , echo = F, warning=F}
-zinbmod.contrast <- zeroinfl(Calls ~ Game * Request, data = dat, dist = "negbin",
-                             subset = Game %in% c("Antisocial", "Prosocial"))
-summary(zinbmod.contrast)
-```
-
+A pairwise contrast between the prosocial-violent and antisocial-violent games did not yield a signficant omnibus test for an effect of game, *chisq*(2) = 3.35, *p* = .187. Tests of individual parameters, however, found a significant difference on the zero-inflation parameter (*z* = -2.14, *p* = .032) but not on the count parameter (*z* = 1.46, *p* = .146). Again, neither game differed from control.
 
 ## Kruskal-Wallis test
-The Kruskal-Wallis test of different group means is only marginally significant, chi-sq(2) = 5.09, p = .079. If we compare just the Gratuitous Violence and Hero-Violence groups, then we get a significant result, chi-sq(1) = 4.97, p = .026, but neither of the other pairwise tests are significant (p = .224, .262).
+The Kruskal-Wallis test is a nonparametric test of group medians. Because the test is only applicable to one-way ANOVA designs and the primary hypothesis regarded effects of game, we collapsed across levels of request and tested for an effect of game. The omnibus test of different group means was only marginally significant, *chisq*(2) = 5.09, p = .079. 
+
+The pairwise contrast between the antisocial and prosocial violent games was statistically significant, *chisq*(1) = 4.97, *p* = .026. However, neither game significantly differed from control, *p* = .224, .262.
+
+# Describing uncertainty
+## Uncertainty across models
+Figure 2A shows the distribution of omnibus test *p*-values across the five models. Figure 2B shows the distribution of pairwise prosocial/antisocial game contrast *p*-values across the five models. 
+
+```{r, echo = F, message=F, warning=F}
+f2a <- filter(omnibus.results, dataset == 4, term == "Game") %>% 
+  arrange(p.value) %>% 
+  mutate(., row = 1:nrow(.),
+         sig = p.value < .05) %>% 
+  ggplot(aes(x = row, y = p.value, col = sig)) +
+  geom_point() +
+  scale_y_continuous(limits = c(0, 1)) +
+  ggtitle("\tOmnibus test results") +
+  theme(axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank()) + 
+  guides(col = F)
+f2b <- filter(contrast.results, dataset == 4, 
+              term %in% c("Game", "GameProsocial")) %>% 
+  arrange(p.value) %>% 
+  mutate(., row = 1:nrow(.),
+         sig = p.value < .05) %>% 
+  ggplot(aes(x = row, y = p.value, col = sig)) +
+  geom_point() +
+  scale_y_continuous(limits = c(0, 1)) +
+  ggtitle("\tContrast test results") +
+  theme(axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank()) + 
+  guides(col = F)
+plot_grid(f2a, f2b, labels = c("A", "B"), ncol = 2)
+```
+
+Across models, the omnibus test is generally not statistically significant, reaching a minimum p-value of .043 in the ANOVA model. The pairwise contrast, on the other hand, is generally statistically significant. Its p-values range from .015 (ANOVA) to .146 (zero-inflated negative binomial model's zero-inflation parameter).
+
+## Uncertainty across datasets
+Two major decisions in data collection and cleaning may influence the results: First, the decision to collect an additional sample after the initial analysis, and second, the decision to exclude 31 participants. The interaction of these two decisions implies four possible datasets for analysis. Figure 3A shows the distribution of omnibus test *p*-values across the five models on each of the four possible datasets. Figure 3B shows shows the distribution of pairwise contrast *p*-values across the five models on each of the four possible datasets. 
+
+```{r, echo = F, message=F, warning=F}
+f3a <- filter(omnibus.results, term == "Game") %>% 
+  arrange(p.value) %>% 
+  mutate(., row = 1:nrow(.),
+         sig = p.value < .05) %>% 
+  ggplot(aes(x = row, y = p.value, col = sig)) +
+  geom_point() +
+  scale_y_continuous(limits = c(0, 1)) +
+  ggtitle("\tOmnibus test results") +
+  theme(axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank()) + 
+  guides(col = F)
+f3b <- filter(contrast.results, 
+              term %in% c("Game", "GameProsocial")) %>% 
+  arrange(p.value) %>% 
+  mutate(., row = 1:nrow(.),
+         sig = p.value < .05) %>% 
+  ggplot(aes(x = row, y = p.value, col = sig)) +
+  geom_point() +
+  scale_y_continuous(limits = c(0, 1)) +
+  ggtitle("\tContrast test results") +
+  theme(axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank()) + 
+  guides(col = F)
+plot_grid(f3a, f3b, labels = c("A", "B"), ncol = 2)
+```
+
+Together, these figures illustrate the uncertainty in the *p*-value across datasets. Again, we note that only one analysis yielded a significant omnibus test. Additionally, pairwise contrast is statistically significant only when either 1) including both data collections and excluding the 31 subjects of questionable quality or 2) conducting ANOVA on the initial dataset, making no exclusions. 
+Naturally, more data is better, and bad data should be excluded. Still, to the extent that these decisions were made *ad hoc*, it is useful to note their influence on the *p*-value.
 
 # Summary
-The results generally seem to be a little ambiguous. We can just reach statistical significance if we ignore the problems with the distribution. I don't recommend this, because it could be embarrassing in peer review, pre- or post-publication. Use of the zero-inflated negative binomial indicates an absence of significant effects. However, use of logistic regression suggests slight evidence that the prosocial game lead to greater likelihood of making any calls relative to the antisocial game, and the non-parametric KW test indicates a possible difference in means between the two conditions. 
+We generally did not detect a significant overall effect of game on prosocial behavior. Still, pairwise contrasts suggested a significant difference in behavior following the prosocial-violent as compared to the antisocial-violent game. However, this contrast should be interpreted with caution given that neither violent game significantly differed from the control game.
 
-Still, the absence of a significant omnibus test, combined with the p-values all being .05 > p > .025 and the decision to continue analysis after a peek at the data means that we may face criticism if we try to make a firm argment for the alternative hypothesis. Perhaps it would be possible to report the experiment as having ambiguous results and publish it in an open-access journal. I am fond of Royal Society Open Science, which does not charge any publication fee. I am, of course, open to publication in a more mainstream journal if the lead authors want to pursue it.
+Considerable uncertainty remains. The type I error rate will be influenced by our decision to collect additional data after the initial collection. The decision to exclude subjects is justifiable, but not based on any *a priori* rule, creating another researcher degree of freedom. The prosocial-violence vs. antisocial-violence contrast is one of three potential contrasts that consider the effects of game. Finally, the results are a little sensitive to the particular model applied. Whereas a typical manuscript might conceal the ambiguity by presenting just one analysis, here we find it most helpful to show all possible analyses.
 
-Please let me know if you have a preference for which analyses to highlight in the manuscript. 
-It might be interesting to showcase the ambiguity of interpretation as a function of the marginal p-values and choice of model.
+This uncertainty should not be mistaken for an argument that games do not influence prosocial behavior. Although statistical significance is sporadic and sensitive to choice of model, contrast, or dataset, it is generally not the case that the results constitute clear support for the null hypothesis.
+
+The results of this study are nonetheless helpful in estimating the effects of antisocial-violent and prosocial-violent games. Although it is unclear whether these games have effects that differ from that of a control game, we did learn that if such effects exist, they are not large and obvious. Furthermore, we are able to rule out some effects of opposite direction. The data are inconsistent with antisocial-violent games *promoting* prosocial behavior or prosocial-violent games *inhibiting* prosocial behavior.
+
+In conclusion, despite collection of a moderately-sized sample, the results are ambiguous regarding whether prosocial-violent and antisocial-violent games affect prosocial behavior as compared to a nonviolent game. Some support for a difference between antisocial and prosocial violent games was found, but this difference was sensitive to the choice of model and dataset. Future research is encouraged to test the effects of prosocial, antisocial, violent, and nonviolent games on prosocial behavior. This research program would be facilitated by the development of more sensitive and model-friendly measures of prosocial behavior.

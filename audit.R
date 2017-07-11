@@ -4,8 +4,8 @@ library(dplyr)
 library(ggplot2)
 library(lubridate)
 
-dat.old = read.delim("HeroViolence.txt")
-dat.old2 = read.csv("HeroViolenceData - final complete data file.csv", stringsAsFactors = F)
+dat.old = read.delim("./partial_datafiles/HeroViolence.txt")
+dat.old2 = read.csv("./partial_datafiles/HeroViolenceData - final complete data file.csv", stringsAsFactors = F)
 dat.new = read_spss("./partial_datafiles/HeroViolenceData - FS 14 dataAdam.sav")
 
 
