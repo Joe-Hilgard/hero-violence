@@ -430,3 +430,6 @@ bf4 # 2.3 : 1 for?
 # http://www.meta-analysis.com/downloads/Meta-analysis%20Converting%20among%20effect%20sizes.pdf
 # http://www.campbellcollaboration.org/escalc/html/EffectSizeCalculator-R6.php
 
+# ANOVABF
+anovaBF(Calls ~ Game * Request, data = dat)
+anovaBF(Calls ~ Game * Request, data = subset(dat, Game %in% c("Antisocial", "Prosocial")))
