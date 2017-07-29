@@ -45,6 +45,16 @@ dat$DV <-  dat$Calls; dat$DV[dat$DV >= 1] = 1
 # Make 2 (primary data collection, secondary data collection) x 
 #   2 (exclusions, no exclusions) datasets for modeling ambiguity
 
+# Collaborators say the badgroup had hardly anyone volunteer, therefore null
+# said the RAs weren't working hard enough
+with(dat, table(badgroup, Calls == 0)) %>% 
+  prop.table(margin = 1)
+# 40% volunteered in "good", 14% in "bad", 37% overall
+with(dat, table(badgroup, Calls == 0)) %>% 
+  chisq.test() 
+# I guess they are significantly less likely (p = .045) to volunteer
+
+
 dat.1 <- dat # both collections, no exclusions
 dat.2 <- filter(dat, collection == 1) #first collection, no exclusion
 dat.3 <- filter(dat, collection == 1, badgroup == 0) #first collection, exclusion
@@ -431,5 +441,14 @@ bf4 # 2.3 : 1 for?
 # http://www.campbellcollaboration.org/escalc/html/EffectSizeCalculator-R6.php
 
 # ANOVABF
-anovaBF(Calls ~ Game * Request, data = dat)
-anovaBF(Calls ~ Game * Request, data = subset(dat, Game %in% c("Antisocial", "Prosocial")))
+anovaBF(Calls ~ Game * Request, data = dat.1)
+anovaBF(Calls ~ Game * Request, data = subset(dat.1, Game %in% c("Antisocial", "Prosocial")))
+
+anovaBF(Calls ~ Game * Request, data = dat.2)
+anovaBF(Calls ~ Game * Request, data = subset(dat.2, Game %in% c("Antisocial", "Prosocial")))
+
+anovaBF(Calls ~ Game * Request, data = dat.3)
+anovaBF(Calls ~ Game * Request, data = subset(dat.3, Game %in% c("Antisocial", "Prosocial")))
+
+anovaBF(Calls ~ Game * Request, data = dat.4)
+anovaBF(Calls ~ Game * Request, data = subset(dat.4, Game %in% c("Antisocial", "Prosocial")))
