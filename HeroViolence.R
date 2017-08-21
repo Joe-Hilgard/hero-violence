@@ -50,7 +50,7 @@ dat$DV <-  dat$Calls; dat$DV[dat$DV >= 1] = 1
 with(dat, table(badgroup, Calls == 0)) %>% 
   prop.table(margin = 1)
 # 40% volunteered in "good", 14% in "bad", 37% overall
-with(dat, table(badgroup, Calls == 0)) %>% 
+badgrouptest <- with(dat, table(badgroup, Calls == 0)) %>% 
   chisq.test() 
 # I guess they are significantly less likely (p = .045) to volunteer
 
@@ -441,14 +441,32 @@ bf4 # 2.3 : 1 for?
 # http://www.campbellcollaboration.org/escalc/html/EffectSizeCalculator-R6.php
 
 # ANOVABF
-anovaBF(Calls ~ Game * Request, data = dat.1)
-anovaBF(Calls ~ Game * Request, data = subset(dat.1, Game %in% c("Antisocial", "Prosocial")))
+dat.1 %>% 
+  filter(!is.na(Calls)) %>% 
+  as.data.frame() %>% 
+  anovaBF(Calls ~ Game * Request, 
+          rscaleEffects = .4,
+          data = .)
 
-anovaBF(Calls ~ Game * Request, data = dat.2)
-anovaBF(Calls ~ Game * Request, data = subset(dat.2, Game %in% c("Antisocial", "Prosocial")))
+dat.1 %>% 
+  filter(!is.na(Calls),
+         Game %in% c("Antisocial", "Prosocial")) %>% 
+  as.data.frame() %>% 
+  anovaBF(Calls ~ Game * Request, 
+          rscaleEffects = .4,
+          data = .)
 
-anovaBF(Calls ~ Game * Request, data = dat.3)
-anovaBF(Calls ~ Game * Request, data = subset(dat.3, Game %in% c("Antisocial", "Prosocial")))
+dat.4 %>% 
+  filter(!is.na(Calls)) %>% 
+  as.data.frame() %>% 
+  anovaBF(Calls ~ Game * Request, 
+          rscaleEffects = .4,
+          data = .)
 
-anovaBF(Calls ~ Game * Request, data = dat.4)
-anovaBF(Calls ~ Game * Request, data = subset(dat.4, Game %in% c("Antisocial", "Prosocial")))
+dat.4 %>% 
+  filter(!is.na(Calls),
+         Game %in% c("Antisocial", "Prosocial")) %>% 
+  as.data.frame() %>% 
+  anovaBF(Calls ~ Game * Request, 
+          rscaleEffects = .4,
+          data = .)

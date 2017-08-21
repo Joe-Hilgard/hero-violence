@@ -18,9 +18,13 @@ load("./R-objects/analysis.RData")
 ```
 
 ## Sample
-An initial data collection included 216 subjects, 191 of which were successfully intercepted. After inspection of the results, which were not statistically significant, we decided to collect an additional sample. Additionally, we decided to exclude a semester's worth of participants from one study site (n = 31) for whom the quality of data was suspect. This left us with a final sample of 204 subjects, 189 of which were successfully intercepted. 
+An initial data collection included 216 subjects, 191 of which were successfully intercepted. 
+After inspection of the results, which were not statistically significant, we decided to collect an additional sample. In the absence of a preregistered analysis plan, it is unclear whether data collection would have continued had the results been nonsignificant. Results below may or may not be influenced by slightly increased Type I error rates associated with conditional stopping.
+Additionally, we decided to exclude a semester's worth of participants from one study site (n = 31) for whom the quality of data was suspect. 
+These participants volunteered significantly less frequently than the other participants, `r report_kt(badgrouptest)`, which raised questions about the efficacy of that semester's researcher assistants in soliciting volunteers. [GIBSON, LUEKE, PLEASE CONFIRM.]
+This left us with a final sample of 204 subjects, 189 of which were successfully intercepted. 
 
-Our primary analyses concern this final sample. However, to explore the robustness of our results, we also analyze the data according to the 2 (data collection: initial, final) x 2 (exclusions: excluding, not excluding) set of data.
+Our primary analyses concern this final sample. However, to explore the robustness of our results, we also analyze the data including those 31 participants.
 
 ## Distribution
 
@@ -60,13 +64,19 @@ To test whether the game influenced the odds of volunteering, we collapsed obser
 Anova(logist[[4]], type = 3)
 summary(logist[[4]])
 ```
-The effect of game was not statistically significant, but not especially far from significance either, *chiq(2)* = 5.08, p = .079. Effects of request and the Game x Request interaction were not statistically significant, *chisq(1)* = .351, *p* = .358 and *chisq(2)* = .924, *p* = .948, respectively.
+The effect of game was not statistically significant, but not especially far from significance either, *chiq(2)* = 5.08, *p* = .079. Effects of request and the Game x Request interaction were not statistically significant, *chisq(1)* = .351, *p* = .358 and *chisq(2)* = .924, *p* = .948, respectively.
 
 ```{r, echo = F, warning=F, message = F, include = F}
 summary(logist.c[[4]])
 ```
 
 Again, the contrast between the prosocial-violent and antisocial-violent games was statistically significant, `r report_z(logist.c[[4]], "GameProsocial")`. However, neither game significantly differed from control.
+
+## Chi-squared test
+```{r, echo = F, warning=F, message = F, include = F}
+summary(chisq.c[[4]])
+```
+A chi-squared test was used to test whether the probability of volunteering at all differed across game conditions  (collapsing across levels of request). The omnibus test did not reveal an effect of game, `r report_kt(chisq[[4]])`. As in other analyses, the contrast between prosocial-violent and antisocial-violent was just significant, `r report_kt(chisq.c[[4]])`, although neither game significantly differed from control.
 
 ## Zero-inflated negative binomial
 
@@ -91,7 +101,13 @@ The pairwise contrast between the antisocial and prosocial violent games was sta
 Figure 2A shows the distribution of omnibus test *p*-values across the five models. Figure 2B shows the distribution of pairwise prosocial/antisocial game contrast *p*-values across the five models. 
 
 ```{r, echo = F, message=F, warning=F}
-f2a <- filter(omnibus.results, dataset == 4, term == "Game") %>% 
+omnibus.p <- filter(omnibus.results, dataset == 4, term == "Game")
+contrast.p <- filter(contrast.results, dataset == 4, 
+                     term %in% c("Game", "GameProsocial")) 
+
+
+  
+f2a <- omnibus.p %>% 
   arrange(p.value) %>% 
   mutate(., row = 1:nrow(.),
          sig = p.value < .05) %>% 
@@ -103,8 +119,7 @@ f2a <- filter(omnibus.results, dataset == 4, term == "Game") %>%
         axis.text.x = element_blank(),
         axis.ticks.x = element_blank()) + 
   guides(col = F)
-f2b <- filter(contrast.results, dataset == 4, 
-              term %in% c("Game", "GameProsocial")) %>% 
+f2b <- contrast.p %>% 
   arrange(p.value) %>% 
   mutate(., row = 1:nrow(.),
          sig = p.value < .05) %>% 
@@ -119,13 +134,17 @@ f2b <- filter(contrast.results, dataset == 4,
 plot_grid(f2a, f2b, labels = c("A", "B"), ncol = 2)
 ```
 
-Across models, the omnibus test is generally not statistically significant, reaching a minimum p-value of .043 in the ANOVA model. The pairwise contrast, on the other hand, is generally statistically significant. Its p-values range from .015 (ANOVA) to .146 (zero-inflated negative binomial model's zero-inflation parameter).
+Across models, the omnibus test is generally not statistically significant (median *p* = `r round(median(omnibus.p$p.value), 3)`), reaching a minimum p-value of .043 in the ANOVA model. The pairwise contrast, on the other hand, is generally statistically significant. Its *p*-values range from .015 (ANOVA) to .146 (zero-inflated negative binomial model's zero-inflation parameter), with median *p* = `r round(median(contrast.p$p.value), 3)`. 
 
 ## Uncertainty across datasets
-Two major decisions in data collection and cleaning may influence the results: First, the decision to collect an additional sample after the initial analysis, and second, the decision to exclude 31 participants. The interaction of these two decisions implies four possible datasets for analysis. Figure 3A shows the distribution of omnibus test *p*-values across the five models on each of the four possible datasets. Figure 3B shows shows the distribution of pairwise contrast *p*-values across the five models on each of the four possible datasets. 
+In the analyses presented above, 31 participants were excluded over concerns regarding quality of the research assistants' application of the methods.
+[GIBSON, LUEKE, AM I SAYING THIS RIGHT?]
+One may wonder how robust the results are to the inclusion of these subjects. Figure 3 shows the variability in the *p*-value across this decision to include or exclude. Six parameters in two datasets yields twelve *p*-values. Figure 3A shows the distribution of omnibus test *p*-values, and Figure 3B shows the distribution of pairwise contrast *p*-values across the five models. 
 
 ```{r, echo = F, message=F, warning=F}
-f3a <- filter(omnibus.results, term == "Game") %>% 
+f3a <- filter(omnibus.results, 
+              term == "Game", 
+              dataset %in% c(1, 4)) %>% 
   arrange(p.value) %>% 
   mutate(., row = 1:nrow(.),
          sig = p.value < .05) %>% 
@@ -138,7 +157,8 @@ f3a <- filter(omnibus.results, term == "Game") %>%
         axis.ticks.x = element_blank()) + 
   guides(col = F)
 f3b <- filter(contrast.results, 
-              term %in% c("Game", "GameProsocial")) %>% 
+              term %in% c("Game", "GameProsocial"),
+              dataset %in% c(1,4)) %>% 
   arrange(p.value) %>% 
   mutate(., row = 1:nrow(.),
          sig = p.value < .05) %>% 
@@ -153,15 +173,15 @@ f3b <- filter(contrast.results,
 plot_grid(f3a, f3b, labels = c("A", "B"), ncol = 2)
 ```
 
-Together, these figures illustrate the uncertainty in the *p*-value across datasets. Again, we note that only one analysis yielded a significant omnibus test. Additionally, pairwise contrast is statistically significant only when either 1) including both data collections and excluding the 31 subjects of questionable quality or 2) conducting ANOVA on the initial dataset, making no exclusions. 
-Naturally, more data is better, and bad data should be excluded. Still, to the extent that these decisions were made *ad hoc*, it is useful to note their influence on the *p*-value.
+Together, these figures illustrate the uncertainty in the *p*-value across datasets. Again, we note that only one analysis yielded a significant omnibus test. Additionally, the pairwise contrast is no longer statistically significant when including the 31 subjects of questionable quality. 
+Naturally, more data is better, and bad data should be excluded. Still, to the extent that this decision was made *ad hoc*, it is useful to note their influence on the *p*-value.
 
 # Summary
 We generally did not detect a significant overall effect of game on prosocial behavior. Still, pairwise contrasts suggested a significant difference in behavior following the prosocial-violent as compared to the antisocial-violent game. However, this contrast should be interpreted with caution given that neither violent game significantly differed from the control game.
 
 Considerable uncertainty remains. The type I error rate will be influenced by our decision to collect additional data after the initial collection. The decision to exclude subjects is justifiable, but not based on any *a priori* rule, creating another researcher degree of freedom. The prosocial-violence vs. antisocial-violence contrast is one of three potential contrasts that consider the effects of game. Finally, the results are a little sensitive to the particular model applied. Whereas a typical manuscript might conceal the ambiguity by presenting just one analysis, here we find it most helpful to show all possible analyses.
 
-This uncertainty should not be mistaken for an argument that games do not influence prosocial behavior. Although statistical significance is sporadic and sensitive to choice of model, contrast, or dataset, it is generally not the case that the results constitute clear support for the null hypothesis.
+This uncertainty should not be mistaken for an argument that games do not influence prosocial behavior. Although statistical significance is sporadic and sensitive to choice of model, contrast, or inclusion rules, it is generally not the case that the results constitute clear support for the null hypothesis.
 
 The results of this study are nonetheless helpful in estimating the effects of antisocial-violent and prosocial-violent games. Although it is unclear whether these games have effects that differ from that of a control game, we did learn that if such effects exist, they are not large and obvious. Furthermore, we are able to rule out some effects of opposite direction. The data are inconsistent with antisocial-violent games *promoting* prosocial behavior or prosocial-violent games *inhibiting* prosocial behavior.
 
