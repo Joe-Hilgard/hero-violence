@@ -87,9 +87,9 @@ Anova(zinbmod[[4]], type = 3)
 summary(zinbmod[[4]])
 ```
 
-Application of the zero-inflated negative binomial did not find an omnibus effect of game (*chisq*(2) = 5.09, *p* = .079), request (*chisq*(1) = 0.85, *p* = .358), or Game × Request interaction (*chisq*(2) = 0.11, *p* = .948). The overdispersion parameter was highly significant (*z* = 4.66, *p* < .001), supporting the use of the negative binomial over a zero-inflated Poisson distribution.
+Within the zero-inflated negative binomial model, the effect of game was ambiguous, neither statistically significant nor particularly far from significance (*chisq*(2) = 5.09, *p* = .079). Effects of request (*chisq*(1) = 0.85, *p* = .358) or the Game × Request interaction (*chisq*(2) = 0.11, *p* = .948) were not significant. The overdispersion parameter was highly significant (*z* = 4.66, *p* < .001), supporting the use of the negative binomial over a zero-inflated Poisson distribution.
 
-A pairwise contrast between the prosocial-violent and antisocial-violent games did not yield a signficant omnibus test for an effect of game, *chisq*(2) = 3.35, *p* = .187. Tests of individual parameters, however, found a significant difference on the zero-inflation parameter (*z* = -2.14, *p* = .032) but not on the count parameter (*z* = 1.46, *p* = .146). Again, neither game differed from control.
+A pairwise contrast between the prosocial-violent and antisocial-violent games did not yield a significant omnibus test for an effect of game, *chisq*(2) = 3.35, *p* = .187. Tests of individual parameters, however, found a significant difference on the zero-inflation parameter (*z* = -2.14, *p* = .032) but not on the count parameter (*z* = 1.46, *p* = .146). Again, neither game differed from control.
 
 ## Kruskal-Wallis test
 The Kruskal-Wallis test is a nonparametric test of group medians. Because the test is only applicable to one-way ANOVA designs and the primary hypothesis regarded effects of game, we collapsed across levels of request and tested for an effect of game. The omnibus test of different group means was only marginally significant, *chisq*(2) = 5.09, p = .079. 
