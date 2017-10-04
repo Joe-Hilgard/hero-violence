@@ -8,6 +8,8 @@ output:
 ---
 
 ```{r, echo = F, warning=F, message=F}
+library(devtools)
+#install_github("Joe-Hilgard/hilgard")
 library(car)
 library(pscl)
 library(hilgard)
@@ -18,17 +20,13 @@ load("./R-objects/analysis.RData")
 ```
 
 ## Sample
-An initial data collection included 216 subjects, 191 of which were successfully intercepted. 
-After inspection of the results, which were not statistically significant, we decided to collect an additional sample. In the absence of a preregistered analysis plan, it is unclear whether data collection would have continued had the results been nonsignificant. Results below may or may not be influenced by slightly increased Type I error rates associated with conditional stopping.
-Additionally, we decided to exclude a semester's worth of participants from one study site (n = 31) for whom the quality of data was suspect. 
-These participants volunteered significantly less frequently than the other participants, `r report_kt(badgrouptest)`, which raised questions about the efficacy of that semester's researcher assistants in soliciting volunteers. [GIBSON, LUEKE, PLEASE CONFIRM.]
-This left us with a final sample of 204 subjects, 189 of which were successfully intercepted. 
+An initial data collection included 216 subjects, 191 of which were successfully intercepted by the confederate as they left the laboratory. During data collection, the Spring semester ended before data collection was completed.  We looked at the data to examine whether it was trending in the hypothesized direction, with the idea that we would continue data collection as planned if it was, and would drop data collection if it was not.  The data was indeed trending in the hypothesized direction, so we picked up data collection as originally planned in the following Fall semester.  This natural pause in data collection and evaluation of whether or not to continue collecting data may or may not influence Type I error rates. Additionally, we decided to exclude a semester's worth of participants from one study site (*n* = 31, 21 of which were intercepted), as the confederate used for only that semester did not correctly collect data as was instructed. To support this exclusion of the data, we found the participants solicited by this confederate were statistically less likely to volunteer than other participants, `r report_kt(badgrouptest)`.  This left us with a final sample of 204 subjects, 189 of which were successfully intercepted by the confederate. This left us with a final sample of 204 subjects, 189 of which were successfully intercepted. 
 
-Our primary analyses concern this final sample. However, to explore the robustness of our results, we also analyze the data including those 31 participants.
+Our primary analyses concern this final sample. However, to explore the robustness of our results, we also analyze the data including those 31 excluded participants.
 
 ## Distribution
 
-Initial inspection of the data revealed pronounced non-normality (Figure 1). Many subjects did not offer to make any calls, and among those that do, the number of calls offered is strongly right-skewed and favors multiples of 5. 
+Initial inspection of the data revealed pronounced non-normality (Figure 1). Many subjects did not offer to make any calls, and among thosewho did, the number of calls offered was strongly right-skewed and favored multiples of 5. 
 
 ```{r, echo = F, warning=F, message=F}
 dat.4 %>% 
@@ -37,18 +35,17 @@ dat.4 %>%
                           labels=c("Help Red Cross", "Save Lives"))) %>% 
   ggplot(aes(x = Calls)) +
   geom_histogram() +
-  facet_grid(Game ~ Request)
+  facet_grid(Game ~ Request) +
+  theme_bw()
 ```
 
-This non-normality creates ambiguity in what might be the most appropriate model to fit. Although ANOVA is commonly used and fairly robust to outliers, its assumptions would seem to be violated by the pronounced non-normality of the residuals. 
-
-To that end, we fit alternative models to explore the robustness of the result and to characterize the analytic ambiguity of the results. In total, we fit:
+This non-normality creates ambiguity in what might be the most appropriate model to fit. Although ANOVA is commonly used and fairly robust to outliers, its assumptions would seem to be violated by the pronounced non-normality of the residuals (see e.g. Glass, Peckham, and Sanders, 1972). 
+Therefore, we fit alternative models to explore the robustness of the result and to characterize the analytic ambiguity of the results. In total, we fit:
 1) ANOVA
 2) logistic regression, testing whether condition affected the odds of volunteering to make any calls
 3) a chi-squared test, again testing whether condition affected the odds of volunteering to make any calls
 4) a zero-inflated negative binomial, which accounts for the frequent zero-responses and the strong right skew, and
 5) a non-parametric Kruskal-Wallis test for differences in the median.
-
 Results for each model are reported separately, then synthesized and summarized at the end.
 
 ### ANOVA
@@ -64,7 +61,7 @@ To test whether the game influenced the odds of volunteering, we collapsed obser
 Anova(logist[[4]], type = 3)
 summary(logist[[4]])
 ```
-The effect of game was not statistically significant, but not especially far from significance either, *chiq(2)* = 5.08, *p* = .079. Effects of request and the Game x Request interaction were not statistically significant, *chisq(1)* = .351, *p* = .358 and *chisq(2)* = .924, *p* = .948, respectively.
+The effect of game was not statistically significant, but not especially far from significance either, `r report_LRchisq(logist[[4]], "Game")`. Effects of request and the Game x Request interaction were not statistically significant, `r report_LRchisq(logist[[4]], "Request")` and `r report_LRchisq(logist[[4]], "Game:Request")`, respectively.
 
 ```{r, echo = F, warning=F, message = F, include = F}
 summary(logist.c[[4]])
@@ -74,9 +71,10 @@ Again, the contrast between the prosocial-violent and antisocial-violent games w
 
 ## Chi-squared test
 ```{r, echo = F, warning=F, message = F, include = F}
-summary(chisq.c[[4]])
+chisq[[4]]
+chisq.c[[4]]
 ```
-A chi-squared test was used to test whether the probability of volunteering at all differed across game conditions  (collapsing across levels of request). The omnibus test did not reveal an effect of game, `r report_kt(chisq[[4]])`. As in other analyses, the contrast between prosocial-violent and antisocial-violent was just significant, `r report_kt(chisq.c[[4]])`, although neither game significantly differed from control.
+A chi-squared test was used to test whether the probability of volunteering at all differed across game conditions  (collapsing across levels of request). The omnibus test for game type was not significant, but not far from significance, `r report_kt(chisq[[4]])`. As in other analyses, the contrast between prosocial-violent and antisocial-violent was just significant, `r report_kt(chisq.c[[4]])`, although neither game significantly differed from control.
 
 ## Zero-inflated negative binomial
 
@@ -85,14 +83,29 @@ A zero-inflated negative binomial was then fit to the data. This model has two p
 ```{r, echo = F, warning=F, message=F, include=F}
 Anova(zinbmod[[4]], type = 3)
 summary(zinbmod[[4]])
+
 ```
 
 Within the zero-inflated negative binomial model, the effect of game was ambiguous, neither statistically significant nor particularly far from significance (*chisq*(2) = 5.09, *p* = .079). Effects of request (*chisq*(1) = 0.85, *p* = .358) or the Game × Request interaction (*chisq*(2) = 0.11, *p* = .948) were not significant. The overdispersion parameter was highly significant (*z* = 4.66, *p* < .001), supporting the use of the negative binomial over a zero-inflated Poisson distribution.
 
+```{r, echo = F, warning=F, message = F, include = F}
+summary(zinbmod.c[[4]])
+```
+
 A pairwise contrast between the prosocial-violent and antisocial-violent games did not yield a significant omnibus test for an effect of game, *chisq*(2) = 3.35, *p* = .187. Tests of individual parameters, however, found a significant difference on the zero-inflation parameter (*z* = -2.14, *p* = .032) but not on the count parameter (*z* = 1.46, *p* = .146). Again, neither game differed from control.
 
 ## Kruskal-Wallis test
-The Kruskal-Wallis test is a nonparametric test of group medians. Because the test is only applicable to one-way ANOVA designs and the primary hypothesis regarded effects of game, we collapsed across levels of request and tested for an effect of game. The omnibus test of different group means was only marginally significant, *chisq*(2) = 5.09, p = .079. 
+The Kruskal-Wallis test is a nonparametric test of group medians. Because the test is only applicable to one-way ANOVA designs and the primary hypothesis regarded effects of game, we collapsed across levels of request and tested for an effect of game. 
+
+```{r, echo = F, warning=F, message=F, include=F}
+(kruskal[[4]])
+```
+
+The omnibus test of different group means was only marginally significant, *chisq*(2) = 5.09, p = .079. 
+
+```{r, echo = F, warning=F, message=F, include=F}
+(kruskal.c[[4]])
+```
 
 The pairwise contrast between the antisocial and prosocial violent games was statistically significant, *chisq*(1) = 4.97, *p* = .026. However, neither game significantly differed from control, *p* = .224, .262.
 
@@ -111,8 +124,10 @@ f2a <- omnibus.p %>%
   arrange(p.value) %>% 
   mutate(., row = 1:nrow(.),
          sig = p.value < .05) %>% 
-  ggplot(aes(x = row, y = p.value, col = sig)) +
-  geom_point() +
+  ggplot(aes(x = row, y = p.value, shape = sig)) +
+  scale_shape_identity(aes(solid = sig)) +
+  geom_point(size = 3) +
+  theme_bw() +
   scale_y_continuous(limits = c(0, 1)) +
   ggtitle("\tOmnibus test results") +
   theme(axis.title.x = element_blank(),
@@ -123,14 +138,16 @@ f2b <- contrast.p %>%
   arrange(p.value) %>% 
   mutate(., row = 1:nrow(.),
          sig = p.value < .05) %>% 
-  ggplot(aes(x = row, y = p.value, col = sig)) +
-  geom_point() +
+  ggplot(aes(x = row, y = p.value, shape = sig)) +
+  scale_shape_identity(aes(solid = sig)) +
+  geom_point(size = 3) +
+  theme_bw() +
   scale_y_continuous(limits = c(0, 1)) +
   ggtitle("\tContrast test results") +
   theme(axis.title.x = element_blank(),
         axis.text.x = element_blank(),
         axis.ticks.x = element_blank()) + 
-  guides(col = F)
+  guides(col = F) 
 plot_grid(f2a, f2b, labels = c("A", "B"), ncol = 2)
 ```
 

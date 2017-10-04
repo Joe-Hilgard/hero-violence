@@ -1,4 +1,6 @@
 # Primary analysis script for Hero-Violence experiment
+# install.packages(c('broom', 'pscl', 'car', 'plyr', 
+#                    'BayesFactor', 'tidyverse', 'forcats', 'cowplot'))
 library(broom)
 library(pscl)
 library(car)
@@ -81,6 +83,17 @@ write.table(conting, "for_jasp_conting.csv", row.names = F)
 
 # Zero-inflated poisson ----
 #zipmod = zeroinfl(Calls ~ Game * Request, data = dat)
+
+m1 <- zeroinfl(Calls ~ Game * Request, data = dat.4, dist = "negbin")
+m2 <- zeroinfl(Calls ~ Game + Request, data = dat.4, dist = "negbin")
+m3 <- zeroinfl(Calls ~ Request, data = dat.4, dist = "negbin")
+m4 <- zeroinfl(Calls ~ Game, data = dat.4, dist = "negbin")
+
+waldtest(m1, m2)
+waldtest(m2, m3)
+
+lrtest(m1, m2)
+lrtest(m2, m3)
 
 # t1 LL = -353.1 on 7 DF (Game)
 # t2 LL = -354.5 on 5 DF (Request)
@@ -317,15 +330,16 @@ filter(contrast.results, term %in% c("Game", "GameProsocial")) %>%
   geom_vline(aes(xintercept = median(p.value)))
 # Boxplot style
 filter(omnibus.results, term %in% c("Game", "GameProsocial")) %>% 
-  ggplot(aes(x = 1, y = p.value)) +
+  ggplot(aes(x = .5, y = p.value)) +
   geom_boxplot(width = .5) +
   geom_jitter(aes(col = (p.value < .05)), 
               height = 0, width = .2) +
+  coord_flip() +
   scale_x_continuous(limits = c(0, 1), 
                      breaks = c(0, .05, .10, .25, .5, .75, 1)) +
   scale_y_continuous(limits = c(0, 1)) +
-  geom_vline(aes(xintercept = mean(p.value)), lty = 2) +
-  geom_vline(aes(xintercept = median(p.value)))
+  geom_hline(aes(yintercept = mean(p.value)), lty = 2) +
+  geom_hline(aes(yintercept = median(p.value)))
 filter(contrast.results, term %in% c("Game", "GameProsocial")) %>% 
   ggplot(aes(x = 1, y = p.value)) +
   geom_boxplot(width = .5) +
@@ -391,13 +405,13 @@ summary(mutantmod) # nah, and this is goofy anyway
 
 # Here there be dragons ----
 # Calls per volunteer, poisson ----
-agreed = dat[dat$DV==1,]
-# hist(agreed$Calls)
-modelCalls = glm(Calls ~ Game*Request, family="poisson",data=agreed)
-summary(modelCalls) 
-table(agreed$Game, agreed$Request)
-means2 = tapply(agreed$Calls, INDEX=list(agreed$Game, agreed$Request), FUN=mean, na.rm=T)
-means2
+# agreed = dat[dat$DV==1,]
+# # hist(agreed$Calls)
+# modelCalls = glm(Calls ~ Game*Request, family="poisson",data=agreed)
+# summary(modelCalls) 
+# table(agreed$Game, agreed$Request)
+# means2 = tapply(agreed$Calls, INDEX=list(agreed$Game, agreed$Request), FUN=mean, na.rm=T)
+# means2
 # barplot(means2, beside=T, legend.text=c("Antisocial", "Control", "Prosocial")
 #        , ylab="Volunteering (#calls)"
 #         , args.legend=list(y=10.5)
@@ -405,23 +419,23 @@ means2
 
 # Bayes ----
 # I don't know a lot about contingencyTableBF and this may be a mistake
-tab = table(dat$DV, dat$Game, dat$Request) # table of yes/no volunteering
-bf = contingencyTableBF(tab, sampleType="indepMulti", fixedMargin = "cols")
-bf
-
-tab2 = table(dat$DV, dat$Game)
-bf2 = contingencyTableBF(tab2, sampleType="indepMulti", fixedMargin="cols")
-bf2 # 2:1 against?
-
-# antisocial vs. control
-tab3 = tab2[,1:2]
-bf3 = contingencyTableBF(tab3, sampleType="indepMulti", fixedMargin="cols")
-bf3
-
-# antisocial vs prosocial
-tab4 = tab2[,2:3]
-bf4 = contingencyTableBF(tab4, sampleType="indepMulti", fixedMargin="cols")
-bf4 # 2.3 : 1 for?
+# tab = table(dat$DV, dat$Game, dat$Request) # table of yes/no volunteering
+# bf = contingencyTableBF(tab, sampleType="indepMulti", fixedMargin = "cols")
+# bf
+# 
+# tab2 = table(dat$DV, dat$Game)
+# bf2 = contingencyTableBF(tab2, sampleType="indepMulti", fixedMargin="cols")
+# bf2 # 2:1 against?
+# 
+# # antisocial vs. control
+# tab3 = tab2[,1:2]
+# bf3 = contingencyTableBF(tab3, sampleType="indepMulti", fixedMargin="cols")
+# bf3
+# 
+# # antisocial vs prosocial
+# tab4 = tab2[,2:3]
+# bf4 = contingencyTableBF(tab4, sampleType="indepMulti", fixedMargin="cols")
+# bf4 # 2.3 : 1 for?
 
 # Comparison w/ literature ----
 # Turn odds ratio for yes/no helping into cohen's d for comparison with literature?
