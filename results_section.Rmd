@@ -122,7 +122,7 @@ summary(zinbmod[[4]])
 
 ```
 
-Because we did not have reason to expect the game would influence only the zero-inflation model or only the count model, we tested the overall effect of game on both parameters simultaneously with likelihood-ratio chi-square tests. Within the zero-inflated negative binomial model, the effect of game was ambiguous, neither statistically significant nor particularly far from significance (`r filter(zinbmod.result, dataset == 4, term == "Game") %>% report_LR()`). Effects of request (`r filter(zinbmod.result, dataset == 4, term == "Request") %>% report_LR()`) or the Game × Request interaction (`r filter(zinbmod.result, dataset == 4, term == "Game:Request") %>% report_LR()`) were not significant. The overdispersion parameter was highly significant (*z* = 4.61, *p* < .001), supporting the use of the negative binomial over a zero-inflated Poisson distribution.
+Because we did not have reason to expect the game would influence only the zero-inflation model or only the count model, we tested the overall effect of game on both parameters simultaneously with likelihood-ratio chi-square tests. The effect of game was ambiguous, neither statistically significant nor particularly far from significance (`r filter(zinbmod.result, dataset == 4, term == "Game") %>% report_LR()`). Effects of request (`r filter(zinbmod.result, dataset == 4, term == "Request") %>% report_LR()`) or the Game × Request interaction (`r filter(zinbmod.result, dataset == 4, term == "Game:Request") %>% report_LR()`) were not significant. The overdispersion parameter was highly significant (*z* = 4.61, *p* < .001), supporting the use of the negative binomial over a zero-inflated Poisson distribution.
 
 ```{r, echo = F, warning=F, message = F, include = F}
 filter(zinb.c.result, dataset == 4)
@@ -130,19 +130,22 @@ filter(zinb.zero.c.result, dataset == 4)
 filter(zinb.count.c.result, dataset == 4)
 ```
 
+<!--- Putting these in by hand from table above--->
 A pairwise contrast between the prosocial-violent and antisocial-violent games yielded a significant effect of game, *chisq*(2) = 6.67, *p* = .036. Tests of individual parameters found a significant difference on the zero-inflation parameter (*z* = -2.17, *p* = .030) but not on the count parameter (*z* = 1.30, *p* = .193). Again, neither game differed from control.
 
 ## Kruskal-Wallis test
-The Kruskal-Wallis test is a nonparametric test of group medians. Because the test is only applicable to one-way ANOVA designs and the primary hypothesis regarded effects of game, we collapsed across levels of request and tested for an effect of game. 
+The Kruskal-Wallis test is a nonparametric test of group medians. Because the test is only applicable to one-way ANOVA designs and the primary hypothesis regarded effects of game, we collapsed across levels of request and tested for an effect of game. As in other analyses, the omnibus effect of game was not statistically significant, but not far from significance, *chisq*(2) = 5.09, *p* = .079.
 
 ```{r, echo = F, warning=F, message=F, include=F}
 (kruskal[[4]])
 ```
 
-The omnibus test of different group means was only marginally significant, *chisq*(2) = 5.09, p = .079. 
+
 
 ```{r, echo = F, warning=F, message=F, include=F}
 (kruskal.c[[4]])
+kruskal.test(Calls ~ Game, data = dat.4, subset = Game %in% c("Antisocial", "Control"))
+kruskal.test(Calls ~ Game, data = dat.4, subset = Game %in% c("Control", "Prosocial"))
 ```
 
 The pairwise contrast between the antisocial and prosocial violent games was statistically significant, *chisq*(1) = 4.97, *p* = .026. However, neither game significantly differed from control, *p* = .224, .262.
@@ -159,30 +162,34 @@ contrast.p <- filter(contrast.results, dataset == 4,
 pplot <- function(x, title) {
   PLOT <- x %>% 
     arrange(p.value) %>% 
-  mutate(., row = 1:nrow(.),
-         sig = p.value < .05) %>% 
-  ggplot(aes(x = row, y = p.value, shape = sig)) +
-  scale_shape_identity(aes(solid = sig)) +
-  geom_point(size = 3) +
-  theme_bw() +
-  scale_y_continuous(limits = c(0, 1)) +
-  ggtitle(title) +
-  theme(axis.title.x = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()) + 
-  guides(col = F)
+    mutate(., row = 1:nrow(.),
+           sig = p.value < .05) %>% 
+    ggplot(aes(x = row, y = p.value, shape = sig
+               #, col = dataset
+               )) +
+    scale_shape_identity(aes(solid = sig)) +
+    geom_point(size = 3) +
+    theme_bw() +
+    scale_y_continuous(limits = c(0, .25)) +
+    geom_hline(yintercept = .05) +
+    geom_hline(yintercept = .1, lty = 2) +
+    ggtitle(title) +
+    #scale_color_grey(start = .2, end = .5) +
+    theme(axis.title.x = element_blank(),
+          axis.text.x = element_blank(),
+          axis.ticks.x = element_blank()) + 
+    guides(col = F)
 }
 
-f2a <- pplot(omnibus.p, "\tOmnibus test results")
-f2b <- pplot(contrast.p, "\tContrast test results") 
+f2a <- pplot(omnibus.p, "Omnibus test results")
+f2b <- pplot(contrast.p, "Contrast test results") 
 plot_grid(f2a, f2b, labels = c("A", "B"), ncol = 2)
 ```
 
 Across models, the omnibus test is generally not statistically significant (median *p* = `r round(median(omnibus.p$p.value), 3)`), reaching a minimum p-value of `r round(min(omnibus.p$p.value), 3)` in the ANOVA model. The pairwise contrast, on the other hand, is generally statistically significant. Its *p*-values range from .015 (ANOVA) to .044 (chi-squared test), with median *p* = `r round(median(contrast.p$p.value), 3)`. 
 
 ## Uncertainty across datasets
-In the analyses presented above, 31 participants were excluded over concerns regarding quality of the research assistants' application of the methods.
-[GIBSON, LUEKE, AM I SAYING THIS RIGHT?]
+In the analyses presented above, 31 participants were excluded after it was found that the confederate at one site during one semester was not collecting data as instructed.
 One may wonder how robust the results are to the inclusion of these subjects. Figure 3 shows the variability in the *p*-value across this decision to include or exclude. Six parameters in two datasets yields twelve *p*-values. Figure 3A shows the distribution of omnibus test *p*-values, and Figure 3B shows the distribution of pairwise contrast *p*-values across the five models. 
 
 ```{r, echo = F, message=F, warning=F}
@@ -193,8 +200,8 @@ contrast.p.14 <- filter(contrast.results,
               term %in% c("Game", "GameProsocial"),
               dataset %in% c(1,4))
 
-f3a <- pplot(omnibus.p.14, "\tOmnibus test results")
-f3b <- pplot(contrast.p.14, "\tContrast test results")
+f3a <- pplot(omnibus.p.14, "Omnibus test results")
+f3b <- pplot(contrast.p.14, "Contrast test results")
 plot_grid(f3a, f3b, labels = c("A", "B"), ncol = 2)
 ```
 
@@ -206,16 +213,19 @@ One last way to consider the results would be through a Bayesian ANOVA. Like the
 
 These ANOVAs indicated ambiguous evidence regarding an omnibus effect of game, 1.15:1 odds in favor of H1 over H0. Odds in favor of the prosocial/antisocial game contrast were stronger, but still marginal at 2.96:1 in favor of H1 over H0.
 When including the 31 subjects of questionable quality, these ANOVAs indicated 1.94:1 odds against an omnibus effect of game and 1.44:1 odds in favor of a prosocial/antisocial game contrast. 
-
 This Bayesian approach indicates that the results are ambiguous and that neither H1 nor H0 is a clear winner, consistent with the other analyses presented above. 
 
-# Summary
-We generally did not detect a significant overall effect of game on prosocial behavior. Still, pairwise contrasts suggested a significant difference in behavior following the prosocial-violent as compared to the antisocial-violent game. However, this contrast should be interpreted with caution given that neither violent game significantly differed from the control game.
+# Discussion
+We generally did not detect a significant overall effect of game on prosocial behavior. Still, pairwise contrasts suggested a significant difference in behavior following the prosocial-violent as compared to the antisocial-violent game. However, this contrast should be interpreted with caution given that neither violent game significantly differed from the control game. Evidence was generally equivocal, as indicated by the Bayesian ANOVA.
 
-Considerable uncertainty remains. The type I error rate will be influenced by our decision to collect additional data after the initial collection. The decision to exclude subjects is justifiable, but not based on any *a priori* rule, creating another researcher degree of freedom. The prosocial-violence vs. antisocial-violence contrast is one of three potential contrasts that consider the effects of game. Finally, the results are a little sensitive to the particular model applied. Whereas a typical manuscript might conceal the ambiguity by presenting just one analysis, here we find it most helpful to show all possible analyses.
+Considerable uncertainty remains. The decision to exclude subjects is justifiable, but not based on any *a priori* rule, creating another researcher degree of freedom. The prosocial-violence vs. antisocial-violence contrast is one of three potential contrasts that consider the effects of game. Finally, the results are a little sensitive to the particular model applied. Whereas a typical manuscript might conceal the ambiguity by presenting just one analysis, here we find it most helpful to show all possible analyses.
 
 This uncertainty should not be mistaken for an argument that games do not influence prosocial behavior. Although statistical significance is sporadic and sensitive to choice of model, contrast, or inclusion rules, it is generally not the case that the results constitute clear support for the null hypothesis.
 
-The results of this study are nonetheless helpful in estimating the effects of antisocial-violent and prosocial-violent games. Although it is unclear whether these games have effects that differ from that of a control game, we did learn that if such effects exist, they are not large and obvious. Furthermore, we are able to rule out some effects of opposite direction. The data are inconsistent with antisocial-violent games *promoting* prosocial behavior or prosocial-violent games *inhibiting* prosocial behavior.
+The results of this study are nonetheless helpful in estimating the effects of antisocial-violent and prosocial-violent games. It is unclear whether these types of games differ from control games in their effects on prosocial behavior. If such effects exist, they are likely not large and obvious, at least using this particular measure. Furthermore, we are able to rule out some effects of the opposite direction. The data are inconsistent with antisocial-violent games *promoting* prosocial behavior or prosocial-violent games *inhibiting* prosocial behavior.
+
+The prosocial measure used in the current study was a considerable limitation. Several of the participants that completed the lab portion of the study were missed by the confederate, so they were unable to encounter the prosocial portion of the experiment.  Additionally most participants declined to volunteer, causing something of a floor effect.  A prosocial measure in which most participants are willing to help at least a little bit would be more sensitive.  This would also be more effective in testing potential decreases in prosocial behavior, as the control group mean would be further from the floor. Better psychometric properties would also provide a better test of potential increases in prosocial behavior following a violent-prosocial game. 
 
 In conclusion, despite collection of a moderately-sized sample, the results are ambiguous regarding whether prosocial-violent and antisocial-violent games affect prosocial behavior as compared to a nonviolent game. Some support for a difference between antisocial and prosocial violent games was found, but this difference was sensitive to the choice of model and dataset. Future research is encouraged to test the effects of prosocial, antisocial, violent, and nonviolent games on prosocial behavior. This research program would be facilitated by the development of more sensitive and model-friendly measures of prosocial behavior.
+
+In particular, with a better measure of prosocial behavior, the current ambiguous results that provide some very tentative support for the difference between prosocial-violent and antisocial-violent could be clarified.  It is possible that violent video games reduce prosocial behavior, whereas the prosocial element of violent video games may counteract the violent nature of the game, which would result in similar prosocial behavior to a control game.  On the other hand, it is possible that the prosocial element of a violent video game increases prosocial behavior above an antisocial violent game, which may or may not be different from a control game.  Another possibility is that a prosocial violent video game encourages both prosocial behavior and aggression, but the context determines which of those responses would be elicited.  For instance, after playing a prosocial violent game, the prosocial element of the game may influence players to help an elderly person across the street, while the violent element of the game may influence the player to yell at someone in a car that impatiently honks at the delay.  Future research should work to disentangle all of these possibilities and further enhance our understanding of the potential different effects that antisocial violence and prosocial violence may have on the gamer.
