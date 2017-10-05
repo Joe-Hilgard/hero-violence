@@ -8,15 +8,44 @@ output:
 ---
 
 ```{r, echo = F, warning=F, message=F}
-library(devtools)
-#install_github("Joe-Hilgard/hilgard")
 library(car)
 library(pscl)
 library(hilgard)
+library(plyr)
 library(tidyverse)
 library(broom)
 library(cowplot)
+library(lmtest)
 load("./R-objects/analysis.RData")
+
+report_LRchisq <- function(model, effect) {
+
+  frame <- tidy(car::Anova(model, type = 3))
+  df <- with(frame, df[term == effect])
+
+  chisq <- with(frame, LR.Chisq[term == effect])
+  chisq <- round(chisq, 2)
+
+  p <- with(frame, p.value[term == effect])
+  p <- fix_p(p)
+
+  output <- paste0("*chisq*(", df, ") = ", chisq, ", ", p)
+  return(output)
+}
+
+report_LR <- function(row) {
+
+  df <- row$df
+
+  chisq <- row$LR.chisq
+  chisq <- round(chisq, 2)
+
+  p <- row$p.value
+  p <- fix_p(p)
+
+  output <- paste0("*chisq*(", df, ") = ", chisq, ", ", p)
+  return(output)
+}
 ```
 
 ## Sample
@@ -48,8 +77,15 @@ Therefore, we fit alternative models to explore the robustness of the result and
 5) a non-parametric Kruskal-Wallis test for differences in the median.
 Results for each model are reported separately, then synthesized and summarized at the end.
 
-### ANOVA
+<!--- In the analyses below, generally use Anova() to look at omnibus effect, 
+summary() to look at pairwise comparisons against control,
+model.c to look at pairwise anti- vs pro-social contrast--->
 
+### ANOVA
+```{r, message = F, echo = F, warning=F, include = F}
+Anova(aovmod[[4]], type = 3)
+summary(aovmod[[4]])
+```
 ANOVA indicated a significant effect of game, `r report_f(aovmod[[4]], "Game")`. Neither the effect of request nor the Game × Request interaction was statistically significant, `r report_f(aovmod[[4]], "Request")` and `r report_f(aovmod[[4]], "Game:Request")`, respectively.  
 
 Collapsing across levels of request, a contrast between the prosocial-violence and antisocial-violence conditions was statistically significant, `r report_t(aovmod.c[[4]], "GameProsocial")`. Neither game significantly differed from control. 
@@ -86,13 +122,15 @@ summary(zinbmod[[4]])
 
 ```
 
-Within the zero-inflated negative binomial model, the effect of game was ambiguous, neither statistically significant nor particularly far from significance (*chisq*(2) = 5.09, *p* = .079). Effects of request (*chisq*(1) = 0.85, *p* = .358) or the Game × Request interaction (*chisq*(2) = 0.11, *p* = .948) were not significant. The overdispersion parameter was highly significant (*z* = 4.66, *p* < .001), supporting the use of the negative binomial over a zero-inflated Poisson distribution.
+Because we did not have reason to expect the game would influence only the zero-inflation model or only the count model, we tested the overall effect of game on both parameters simultaneously with likelihood-ratio chi-square tests. Within the zero-inflated negative binomial model, the effect of game was ambiguous, neither statistically significant nor particularly far from significance (`r filter(zinbmod.result, dataset == 4, term == "Game") %>% report_LR()`). Effects of request (`r filter(zinbmod.result, dataset == 4, term == "Request") %>% report_LR()`) or the Game × Request interaction (`r filter(zinbmod.result, dataset == 4, term == "Game:Request") %>% report_LR()`) were not significant. The overdispersion parameter was highly significant (*z* = 4.61, *p* < .001), supporting the use of the negative binomial over a zero-inflated Poisson distribution.
 
 ```{r, echo = F, warning=F, message = F, include = F}
-summary(zinbmod.c[[4]])
+filter(zinb.c.result, dataset == 4)
+filter(zinb.zero.c.result, dataset == 4)
+filter(zinb.count.c.result, dataset == 4)
 ```
 
-A pairwise contrast between the prosocial-violent and antisocial-violent games did not yield a significant omnibus test for an effect of game, *chisq*(2) = 3.35, *p* = .187. Tests of individual parameters, however, found a significant difference on the zero-inflation parameter (*z* = -2.14, *p* = .032) but not on the count parameter (*z* = 1.46, *p* = .146). Again, neither game differed from control.
+A pairwise contrast between the prosocial-violent and antisocial-violent games yielded a significant effect of game, *chisq*(2) = 6.67, *p* = .036. Tests of individual parameters found a significant difference on the zero-inflation parameter (*z* = -2.17, *p* = .030) but not on the count parameter (*z* = 1.30, *p* = .193). Again, neither game differed from control.
 
 ## Kruskal-Wallis test
 The Kruskal-Wallis test is a nonparametric test of group medians. Because the test is only applicable to one-way ANOVA designs and the primary hypothesis regarded effects of game, we collapsed across levels of request and tested for an effect of game. 
@@ -118,10 +156,9 @@ omnibus.p <- filter(omnibus.results, dataset == 4, term == "Game")
 contrast.p <- filter(contrast.results, dataset == 4, 
                      term %in% c("Game", "GameProsocial")) 
 
-
-  
-f2a <- omnibus.p %>% 
-  arrange(p.value) %>% 
+pplot <- function(x, title) {
+  PLOT <- x %>% 
+    arrange(p.value) %>% 
   mutate(., row = 1:nrow(.),
          sig = p.value < .05) %>% 
   ggplot(aes(x = row, y = p.value, shape = sig)) +
@@ -129,29 +166,19 @@ f2a <- omnibus.p %>%
   geom_point(size = 3) +
   theme_bw() +
   scale_y_continuous(limits = c(0, 1)) +
-  ggtitle("\tOmnibus test results") +
+  ggtitle(title) +
   theme(axis.title.x = element_blank(),
         axis.text.x = element_blank(),
         axis.ticks.x = element_blank()) + 
   guides(col = F)
-f2b <- contrast.p %>% 
-  arrange(p.value) %>% 
-  mutate(., row = 1:nrow(.),
-         sig = p.value < .05) %>% 
-  ggplot(aes(x = row, y = p.value, shape = sig)) +
-  scale_shape_identity(aes(solid = sig)) +
-  geom_point(size = 3) +
-  theme_bw() +
-  scale_y_continuous(limits = c(0, 1)) +
-  ggtitle("\tContrast test results") +
-  theme(axis.title.x = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()) + 
-  guides(col = F) 
+}
+
+f2a <- pplot(omnibus.p, "\tOmnibus test results")
+f2b <- pplot(contrast.p, "\tContrast test results") 
 plot_grid(f2a, f2b, labels = c("A", "B"), ncol = 2)
 ```
 
-Across models, the omnibus test is generally not statistically significant (median *p* = `r round(median(omnibus.p$p.value), 3)`), reaching a minimum p-value of .043 in the ANOVA model. The pairwise contrast, on the other hand, is generally statistically significant. Its *p*-values range from .015 (ANOVA) to .146 (zero-inflated negative binomial model's zero-inflation parameter), with median *p* = `r round(median(contrast.p$p.value), 3)`. 
+Across models, the omnibus test is generally not statistically significant (median *p* = `r round(median(omnibus.p$p.value), 3)`), reaching a minimum p-value of `r round(min(omnibus.p$p.value), 3)` in the ANOVA model. The pairwise contrast, on the other hand, is generally statistically significant. Its *p*-values range from .015 (ANOVA) to .044 (chi-squared test), with median *p* = `r round(median(contrast.p$p.value), 3)`. 
 
 ## Uncertainty across datasets
 In the analyses presented above, 31 participants were excluded over concerns regarding quality of the research assistants' application of the methods.
@@ -159,39 +186,28 @@ In the analyses presented above, 31 participants were excluded over concerns reg
 One may wonder how robust the results are to the inclusion of these subjects. Figure 3 shows the variability in the *p*-value across this decision to include or exclude. Six parameters in two datasets yields twelve *p*-values. Figure 3A shows the distribution of omnibus test *p*-values, and Figure 3B shows the distribution of pairwise contrast *p*-values across the five models. 
 
 ```{r, echo = F, message=F, warning=F}
-f3a <- filter(omnibus.results, 
+omnibus.p.14 <- filter(omnibus.results, 
               term == "Game", 
-              dataset %in% c(1, 4)) %>% 
-  arrange(p.value) %>% 
-  mutate(., row = 1:nrow(.),
-         sig = p.value < .05) %>% 
-  ggplot(aes(x = row, y = p.value, col = sig)) +
-  geom_point() +
-  scale_y_continuous(limits = c(0, 1)) +
-  ggtitle("\tOmnibus test results") +
-  theme(axis.title.x = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()) + 
-  guides(col = F)
-f3b <- filter(contrast.results, 
+              dataset %in% c(1, 4))
+contrast.p.14 <- filter(contrast.results, 
               term %in% c("Game", "GameProsocial"),
-              dataset %in% c(1,4)) %>% 
-  arrange(p.value) %>% 
-  mutate(., row = 1:nrow(.),
-         sig = p.value < .05) %>% 
-  ggplot(aes(x = row, y = p.value, col = sig)) +
-  geom_point() +
-  scale_y_continuous(limits = c(0, 1)) +
-  ggtitle("\tContrast test results") +
-  theme(axis.title.x = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()) + 
-  guides(col = F)
+              dataset %in% c(1,4))
+
+f3a <- pplot(omnibus.p.14, "\tOmnibus test results")
+f3b <- pplot(contrast.p.14, "\tContrast test results")
 plot_grid(f3a, f3b, labels = c("A", "B"), ncol = 2)
 ```
 
-Together, these figures illustrate the uncertainty in the *p*-value across datasets. Again, we note that only one analysis yielded a significant omnibus test. Additionally, the pairwise contrast is no longer statistically significant when including the 31 subjects of questionable quality. 
-Naturally, more data is better, and bad data should be excluded. Still, to the extent that this decision was made *ad hoc*, it is useful to note their influence on the *p*-value.
+Together, these figures illustrate the uncertainty in the *p*-value across datasets. Again, we note that only one analysis yielded a significant omnibus test. Additionally, some of the pairwise contrasts are no longer statistically significant when including the 31 subjects of questionable quality. 
+Naturally, bad data should be excluded. Still, to the extent that this decision was made *ad hoc*, it is useful to note their influence on the *p*-value.
+
+# Bayesian ANOVA
+One last way to consider the results would be through a Bayesian ANOVA. Like the frequentist ANOVA presented above, this model suffers from violated assumptions of normally distributed residuals. However, it does have the advantage of appraising the evidence in terms of continuous odds rather than the dichotomy of statistical significance. Effects were tested using the anovaBF() function in the BayesFactor package (Morey & Rouder, 2015) using a Cauchy prior with scale parameter 0.4, consistent with effects typical of social psychology.
+
+These ANOVAs indicated ambiguous evidence regarding an omnibus effect of game, 1.15:1 odds in favor of H1 over H0. Odds in favor of the prosocial/antisocial game contrast were stronger, but still marginal at 2.96:1 in favor of H1 over H0.
+When including the 31 subjects of questionable quality, these ANOVAs indicated 1.94:1 odds against an omnibus effect of game and 1.44:1 odds in favor of a prosocial/antisocial game contrast. 
+
+This Bayesian approach indicates that the results are ambiguous and that neither H1 nor H0 is a clear winner, consistent with the other analyses presented above. 
 
 # Summary
 We generally did not detect a significant overall effect of game on prosocial behavior. Still, pairwise contrasts suggested a significant difference in behavior following the prosocial-violent as compared to the antisocial-violent game. However, this contrast should be interpreted with caution given that neither violent game significantly differed from the control game.
